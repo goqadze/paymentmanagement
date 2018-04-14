@@ -1,0 +1,66 @@
+<link rel="import" href="/webcomponents/payments-filter.html">
+<link rel="import" href="/webcomponents/payments.html">
+<link rel="import" href="/webcomponents/payments-chart.html">
+
+<template id='main-template'>
+    <style>
+        :host {
+            background: cornsilk;
+            border: 1px solid goldenrod;
+            margin: 0;
+            padding: 15px;
+            position: relative;
+            top: 0;
+            left: 0;
+            display: block;
+        }
+    </style>
+
+    <div id='content'>
+        <payments-filter visible></payments-filter>
+        <payments-list></payments-list>
+        <div id="charts">
+            <payments-chart></payments-chart>
+            <payments-chart></payments-chart>
+        </div>
+    </div>
+</template>
+
+<script>
+    (function () {
+        let thisImportDoc = document.currentScript.ownerDocument;
+
+        class Main extends HTMLElement {
+            constructor() {
+                super();
+            }
+
+            static get template() {
+                if (!this._template) {
+                    this._template = thisImportDoc.querySelector('#main-template');
+                }
+                return this._template;
+            }
+
+            connectedCallback() {
+                console.log('main connected to page');
+
+                let shadowRoot = this.attachShadow({mode: 'open'});
+                let template = Main.template;
+                shadowRoot.appendChild(
+                    document.importNode(template.content, true)
+                );
+
+                // Polyfill
+                const supportNativeShadowDom = !!HTMLElement.prototype.attachShadow;
+                if (!supportNativeShadowDom) {
+                    ShadyCSS.applyStyle(this);
+                }
+            }
+        }
+
+        ShadyCSS.prepareTemplate(Main.template, 'app-main');
+
+        customElements.define('app-main', Main);
+    })();
+</script>

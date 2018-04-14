@@ -6,26 +6,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Payments</title>
-
     <script src="/js/libs/polyfills/webcomponents-lite.js"></script>
 
-    <link rel="import" href="/webcomponents/payment_item.html" id="paymentTemplate">
+    <link rel="import" href="/webcomponents/test-component.html">
+    <link rel="import" href="/webcomponents/app-wrapper.html">
+
+</head>
+<body>
+    <app-wrapper></app-wrapper>
+
+
+    <test-component id="test" visible type="critical">
+        This is a payment item
+
+        <span slot="title">Hey there!</span>
+    </test-component>
+    <button id="btn">Toggle</button>
 
     <script>
         window.addEventListener('load', e => {
             document.getElementById('btn').addEventListener('click', evt => {
-                document.getElementById('payment').visible = !document.getElementById('payment').visible;
+                let node = document.getElementById('test');
+                node.visible = !node.visible;
             })
         })
     </script>
-</head>
-<body>
-    <payment-item id="payment" visible >
-        This is a payment item
-
-        <span slot="title">Hey there!</span>
-    </payment-item>
-
-    <button id="btn">Toggle</button>
 </body>
 </html>

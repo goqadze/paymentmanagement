@@ -1,4 +1,4 @@
-<template id='payment-item-template'>
+<template id='test-component-template'>
     <style>
         :host {
             background: cornsilk;
@@ -39,7 +39,7 @@
     (function () {
         let thisImportDoc = document.currentScript.ownerDocument;
 
-        class PaymentItem extends HTMLElement {
+        class TestComponent extends HTMLElement {
             constructor() {
                 super();
             }
@@ -50,16 +50,16 @@
 
             static get template() {
                 if (!this._template) {
-                    this._template = thisImportDoc.querySelector('#payment-item-template');
+                    this._template = thisImportDoc.querySelector('#test-component-template');
                 }
                 return this._template;
             }
 
             connectedCallback() {
-                console.log('message-banner connected to page');
+                console.log('test-component connected to page');
 
                 let shadowRoot = this.attachShadow({mode: 'open'});
-                let template = PaymentItem.template;
+                let template = TestComponent.template;
                 shadowRoot.appendChild(
                     document.importNode(template.content, true)
                 );
@@ -77,15 +77,15 @@
             }
 
             disconnectedCallback() {
-                console.log('payment-item disconnected from page');
+                console.log('payment disconnected from page');
             }
 
             adoptedCallback() {
-                console.log('payment-item adopted to page');
+                console.log('payment adopted to page');
             }
 
             attributeChangedCallback(name, oldValue, newValue) {
-                console.log(`payment-item attr: '${name}' changed from '${oldValue}' to '${newValue}'`)
+                console.log(`payment attr: '${name}' changed from '${oldValue}' to '${newValue}'`)
             }
 
             get visible() {
@@ -101,8 +101,8 @@
             }
         }
 
-        ShadyCSS.prepareTemplate(PaymentItem.template, 'payment-item');
+        ShadyCSS.prepareTemplate(TestComponent.template, 'test-component');
 
-        customElements.define('payment-item', PaymentItem);
+        customElements.define('test-component', TestComponent);
     })();
 </script>
