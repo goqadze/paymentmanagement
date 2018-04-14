@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Filters\PaymentFilters;
 use App\Payment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class PaymentController extends Controller
 {
@@ -23,15 +24,15 @@ class PaymentController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         request()->validate([
-            'title' => 'required|spamfree',
+            'title' => 'required|min:4',
             'amount' => 'required|numeric|min:0.01',
-            'comment' => 'required|spamfree',
+            'comment' => 'required|min:4',
             'category_id' => 'required|exists:categories,id',
         ]);
 
