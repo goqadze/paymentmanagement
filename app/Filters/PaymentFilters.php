@@ -29,12 +29,12 @@ class PaymentFilters extends Filters
 
     protected function min_amount($value)
     {
-        return $this->builder->where('min_amount', '>=', $value);
+        return $this->builder->where('amount', '>=', $value);
     }
 
     protected function max_amount($value)
     {
-        return $this->builder->where('max_amount', '<=', $value);
+        return $this->builder->where('amount', '<=', $value);
     }
 
     protected function category_id($value)
