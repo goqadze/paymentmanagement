@@ -1,3 +1,6 @@
-import configureStore from './configureStore';
+import configureStore from './configureStore.js';
 
-export default store = configureStore();
+const store = configureStore();
+
+window['store'] = store;
+

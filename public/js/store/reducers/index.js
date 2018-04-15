@@ -1,6 +1,6 @@
-import isAdding from './isAdding';
-import isFetching from './isFetching';
-import payments from './payments';
+import isAdding from './isAdding.js';
+import isFetching from './isFetching.js';
+import payments from './payments.js';
 
 const combineReducers = (reducers) => {
     return (state = {}, action) => {
@@ -13,11 +13,13 @@ const combineReducers = (reducers) => {
     }
 };
 
-export default paymentApp = combineReducers({
+const paymentApp = combineReducers({
     isAdding,
     isFetching,
     payments,
 });
+
+export default paymentApp;
 
 export const getIsFetching = (state) => state.isFetching;
 export const getIsAdding = (state) => state.isAdding;

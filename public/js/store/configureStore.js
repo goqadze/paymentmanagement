@@ -1,6 +1,6 @@
-import createStore from './createStore'
-import {logger, thunk} from './middlewares'
-import paymentApp from './reducers'
+import createStore from './createStore.js';
+import {logger, thunk} from './middlewares/index.js';
+import paymentApp from './reducers/index.js';
 
 const wrapDispatchWithMiddlewares = (store, middlewares) => {
     middlewares.slice().reverse().forEach(middleware => {
