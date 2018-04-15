@@ -25,6 +25,8 @@
 </template>
 
 <script>
+    import store from '../js/store';
+
     (function () {
         let thisImportDoc = document.currentScript.ownerDocument;
 
@@ -41,6 +43,8 @@
             }
 
             connectedCallback() {
+                window['store'] = store;
+
                 console.log('app wrapper connected to page');
 
                 let shadowRoot = this.attachShadow({mode: 'open'});
