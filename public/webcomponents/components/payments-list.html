@@ -1,4 +1,4 @@
-<link rel="import" href="/webcomponents/payment.html">
+<link rel="import" href="payment-item.html">
 
 <template id='payments-list-template'>
     <style>
@@ -29,6 +29,12 @@
         class Payments extends HTMLElement {
             constructor() {
                 super();
+
+                let shadowRoot = this.attachShadow({mode: 'open'});
+                let template = Payments.template;
+                shadowRoot.appendChild(
+                    document.importNode(template.content, true)
+                );
             }
 
             static get template() {
@@ -40,13 +46,6 @@
 
             connectedCallback() {
                 console.log('payments-list connected to page');
-
-                let shadowRoot = this.attachShadow({mode: 'open'});
-                let template = Payments.template;
-                shadowRoot.appendChild(
-                    document.importNode(template.content, true)
-                );
-
 
                 // Polyfill
                 const supportNativeShadowDom = !!HTMLElement.prototype.attachShadow;

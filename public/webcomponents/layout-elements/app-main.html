@@ -1,6 +1,6 @@
-<link rel="import" href="/webcomponents/payments-filter.html">
-<link rel="import" href="/webcomponents/payments.html">
-<link rel="import" href="/webcomponents/payments-chart.html">
+<link rel="import" href="../components/payments-filter.html">
+<link rel="import" href="../components/payments-list.html">
+<link rel="import" href="../components/payments-chart.html">
 
 <template id='main-template'>
     <style>
@@ -9,19 +9,34 @@
             border: 1px solid goldenrod;
             margin: 0;
             padding: 15px;
-            position: relative;
-            top: 0;
-            left: 0;
-            display: block;
+            display: flex;
+            flex-direction: column;
+        }
+
+        @media (min-width: 768px) {
+            .list-and-charts{
+                display: flex;
+                flex-direction: row;
+            }
+        }
+
+        .list-and-charts > payments-list{
+            flex: 5;
+        }
+
+        .list-and-charts > .charts{
+            flex: 4;
         }
     </style>
 
     <div id='content'>
         <payments-filter visible></payments-filter>
-        <payments-list></payments-list>
-        <div id="charts">
-            <payments-chart></payments-chart>
-            <payments-chart></payments-chart>
+        <div class="list-and-charts">
+            <payments-list></payments-list>
+            <div class="charts">
+                <payments-chart></payments-chart>
+                <payments-chart></payments-chart>
+            </div>
         </div>
     </div>
 </template>
@@ -33,6 +48,12 @@
         class Main extends HTMLElement {
             constructor() {
                 super();
+
+                let shadowRoot = this.attachShadow({mode: 'open'});
+                let template = Main.template;
+                shadowRoot.appendChild(
+                    document.importNode(template.content, true)
+                );
             }
 
             static get template() {
@@ -44,12 +65,6 @@
 
             connectedCallback() {
                 console.log('main connected to page');
-
-                let shadowRoot = this.attachShadow({mode: 'open'});
-                let template = Main.template;
-                shadowRoot.appendChild(
-                    document.importNode(template.content, true)
-                );
 
                 // Polyfill
                 const supportNativeShadowDom = !!HTMLElement.prototype.attachShadow;

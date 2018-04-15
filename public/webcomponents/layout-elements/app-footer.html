@@ -25,6 +25,12 @@
         class Footer extends HTMLElement {
             constructor() {
                 super();
+
+                let shadowRoot = this.attachShadow({mode: 'open'});
+                let template = Footer.template;
+                shadowRoot.appendChild(
+                    document.importNode(template.content, true)
+                );
             }
 
             static get template() {
@@ -36,12 +42,6 @@
 
             connectedCallback() {
                 console.log('app-footer connected to page');
-
-                let shadowRoot = this.attachShadow({mode: 'open'});
-                let template = Footer.template;
-                shadowRoot.appendChild(
-                    document.importNode(template.content, true)
-                );
 
                 // Polyfill
                 const supportNativeShadowDom = !!HTMLElement.prototype.attachShadow;

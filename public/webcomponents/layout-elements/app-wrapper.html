@@ -1,6 +1,6 @@
-<link rel="import" href="/webcomponents/app-header.html">
-<link rel="import" href="/webcomponents/app-main.html">
-<link rel="import" href="/webcomponents/app-footer.html">
+<link rel="import" href="./app-header.html">
+<link rel="import" href="./app-main.html">
+<link rel="import" href="./app-footer.html">
 
 <template id='app-wrapper-template'>
     <style>
@@ -9,22 +9,18 @@
             border: 1px solid goldenrod;
             margin: 0;
             padding: 15px;
-            position: relative;
-            top: 0;
-            left: 0;
-            display: block;
+            display: flex;
+            flex-direction: column;
         }
     </style>
 
-    <div id='content'>
-        <app-header></app-header>
-        <app-main></app-main>
-        <app-footer></app-footer>
-    </div>
+    <app-header></app-header>
+    <app-main></app-main>
+    <app-footer></app-footer>
 </template>
 
 <!--window['store'] = store;-->
-<script type="module" src="../js/store/index.js"></script>
+<script type="module" src="../../js/store/index.js"></script>
 
 <script>
 
@@ -33,6 +29,12 @@
     class App extends HTMLElement {
         constructor() {
             super();
+
+            let shadowRoot = this.attachShadow({mode: 'open'});
+            let template = App.template;
+            shadowRoot.appendChild(
+                document.importNode(template.content, true)
+            );
         }
 
         static get template() {
@@ -46,12 +48,6 @@
 
             console.log(store);
             console.log('app wrapper connected to page');
-
-            let shadowRoot = this.attachShadow({mode: 'open'});
-            let template = App.template;
-            shadowRoot.appendChild(
-                document.importNode(template.content, true)
-            );
 
             // Polyfill
             const supportNativeShadowDom = !!HTMLElement.prototype.attachShadow;

@@ -1,0 +1,144 @@
+<template id='switch-category-field-template'>
+    <style>
+        :host {
+
+        }
+
+        #content {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        input {
+            position: absolute !important;
+            clip: rect(0, 0, 0, 0);
+            height: 1px;
+            width: 1px;
+            border: 0;
+            overflow: hidden;
+        }
+
+        label {
+            display: inline-block;
+            background-color: #e4e4e4;
+            color: rgba(0, 0, 0, 0.6);
+            font-size: 14px;
+            font-weight: normal;
+            text-align: center;
+            text-shadow: none;
+            padding: 6px 14px;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.1);
+            transition: all 0.1s ease-in-out;
+        }
+
+        label:hover {
+            cursor: pointer;
+        }
+
+        input:checked + label {
+            background-color: #A5DC86;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+        }
+    </style>
+
+    <div id="content">
+        <div class="radio-input">
+            <input type="radio" id="input1" name="category_id" value="1"/>
+            <label for="input1">mobile services</label>
+        </div>
+        <div class="radio-input">
+            <input type="radio" id="input2" name="category_id" value="2"/>
+            <label for="input2">gasoline</label>
+        </div>
+        <div class="radio-input">
+            <input type="radio" id="input3" name="category_id" value="3"/>
+            <label for="input3">food</label>
+        </div>
+        <div class="radio-input">
+            <input type="radio" id="input4" name="category_id" value="4"/>
+            <label for="input4">charity</label>
+        </div>
+        <div class="radio-input">
+            <input type="radio" id="input5" name="category_id" value="5"/>
+            <label for="input5">transport</label>
+        </div>
+    </div>
+
+</template>
+
+<script>
+    (function () {
+        let thisImportDoc = document.currentScript.ownerDocument;
+
+        class SwitchCategoryField extends HTMLElement {
+            constructor() {
+                super();
+
+                let shadowRoot = this.attachShadow({mode: 'open'});
+                let template = SwitchCategoryField.template;
+                shadowRoot.appendChild(
+                    document.importNode(template.content, true)
+                );
+            }
+
+            static get template() {
+                if (!this._template) {
+                    this._template = thisImportDoc.querySelector('#switch-category-field-template');
+                }
+                return this._template;
+            }
+
+            connectedCallback() {
+                console.log('switch-category-field connected to page', this);
+
+                this.addRealHiddenInput();
+
+                //------------------------------ Polyfill
+                const supportNativeShadowDom = !!HTMLElement.prototype.attachShadow;
+                if (!supportNativeShadowDom) {
+                    ShadyCSS.applyStyle(this);
+                }
+            }
+
+            addRealHiddenInput() {
+                let name = this.getAttribute('name');
+                this.realHiddenInput = document.createElement('input');
+                this.realHiddenInput.name = name;
+                this.value = this.getAttribute('value');
+                this.realHiddenInput.type = 'hidden';
+                this.realHiddenInput.tabIndex = -1;
+                this.appendChild(this.realHiddenInput);
+
+                console.log('input', this.realHiddenInput);
+
+                let content = this.shadowRoot.querySelector('#content');
+
+                let radioInputs = content.getElementsByTagName('input');
+
+                Array.from(radioInputs).forEach((el) => {
+                    el.addEventListener('click', evt => {
+                        this.realHiddenInput.value = evt.target.value;
+                    });
+                });
+            }
+
+            get value() {
+                return this.hasAttribute('value');
+            }
+
+            set value(val) {
+                this.realHiddenInput.value = val;
+                let input = this.shadowRoot.querySelector(`input[value="${val}"]`);
+                if (input){
+                    input.checked = true;
+                }
+            }
+        }
+
+        ShadyCSS.prepareTemplate(SwitchCategoryField.template, 'switch-category-field');
+
+        customElements.define('switch-category-field', SwitchCategoryField);
+    })();
+</script>

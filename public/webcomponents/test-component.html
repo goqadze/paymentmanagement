@@ -44,10 +44,6 @@
                 super();
             }
 
-            static get observedAttributes() {
-                return ['visible']
-            }
-
             static get template() {
                 if (!this._template) {
                     this._template = thisImportDoc.querySelector('#test-component-template');
@@ -82,6 +78,10 @@
 
             adoptedCallback() {
                 console.log('payment adopted to page');
+            }
+
+            static get observedAttributes() {
+                return ['visible']
             }
 
             attributeChangedCallback(name, oldValue, newValue) {

@@ -1,0 +1,129 @@
+<link rel="import" href="../custom-elements/switch-field/switch-category-field.html">
+
+<template id='payments-filter-template'>
+    <style>
+        :host {
+            background: cornsilk;
+            border: 1px solid goldenrod;
+            margin: 0;
+            max-height: 400px;
+            padding: 15px;
+            display: none;
+        }
+
+        :host([visible]) {
+            display: flex;
+        }
+
+        .form {
+            display: flex;
+            width: 100%;
+        }
+
+        switch-category-field {
+            flex: 5;
+        }
+
+        .form-group {
+            flex: 4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 1px solid seagreen;
+        }
+
+        .form-group .form-control {
+            width: 80%;
+        }
+
+        .form-group.category > .form-control {
+            align-self: flex-start;
+            margin-left: 8px;
+        }
+
+    </style>
+
+    <form class="form" id="test-form">
+        <div class="form-group category">
+            <h3 class="form-control">filter by amount</h3>
+            <switch-category-field class="form-control"  name="category_id" value="2"></switch-category-field>
+        </div>
+
+        <div class="form-group">
+            <h3 class="form-control">filter by date</h3>
+            <input type="date" name="start_date"  value="" class="form-control" placeholder="from">
+            <input type="date" name="end_date" value="" class="form-control" placeholder="to">
+        </div>
+
+        <div class="form-group">
+            <h3 class="form-control">filter by amount</h3>
+            <input type="text" name="min_amount" value="" class="form-control" placeholder="from">
+            <input type="text" value="max_amount" class="form-control" placeholder="to">
+        </div>
+    </form>
+</template>
+
+<script>
+    (function () {
+        let thisImportDoc = document.currentScript.ownerDocument;
+
+        class Filter extends HTMLElement {
+            constructor() {
+                super();
+
+                let shadowRoot = this.attachShadow({mode: 'open'});
+                let template = Filter.template;
+                shadowRoot.appendChild(
+                    document.importNode(template.content, true)
+                );
+            }
+
+            static get template() {
+                if (!this._template) {
+                    this._template = thisImportDoc.querySelector('#payments-filter-template');
+                }
+                return this._template;
+            }
+
+            connectedCallback() {
+                console.log('payments-filter connected to page');
+
+                let testForm = this.shadowRoot.querySelector('#test-form');
+
+
+                testForm.onsubmit = function (event) {
+                    event.preventDefault();
+
+                    let formData = new FormData(testForm);
+
+                    alert(formData.get('category_id'));
+
+                    console.log(formData);
+                };
+
+
+                // Polyfill
+                const supportNativeShadowDom = !!HTMLElement.prototype.attachShadow;
+                if (!supportNativeShadowDom) {
+                    ShadyCSS.applyStyle(this);
+                }
+            }
+
+            get visible() {
+                return this.hasAttribute('visible');
+            }
+
+            set visible(val) {
+                if (val) {
+                    this.setAttribute('visible', '');
+                } else {
+                    this.removeAttribute('visible');
+                }
+            }
+        }
+
+        ShadyCSS.prepareTemplate(Filter.template, 'payments-filter');
+
+        customElements.define('payments-filter', Filter);
+    })();
+</script>

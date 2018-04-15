@@ -9,7 +9,7 @@
     <script src="/js/libs/polyfills/webcomponents-lite.js"></script>
 
     <link rel="import" href="/webcomponents/test-component.html">
-    <link rel="import" href="/webcomponents/app-wrapper.html">
+    <link rel="import" href="/webcomponents/layout-elements/app-wrapper.html">
 
 </head>
 <body>

@@ -1,11 +1,11 @@
-<template id='app-header-template'>
+<template id='payments-chart-template'>
     <style>
         :host {
-            background: firebrick;
-            border: 1px solid gold;
+            background: cornsilk;
+            border: 1px solid goldenrod;
             margin: 0;
-            max-height: 50px;
-            padding: 5px;
+            max-height: 400px;
+            padding: 15px;
             position: relative;
             top: 0;
             left: 0;
@@ -14,7 +14,7 @@
     </style>
 
     <div id='content'>
-        <h1>Header</h1>
+        <h2>Payments Chart</h2>
     </div>
 </template>
 
@@ -22,26 +22,29 @@
     (function () {
         let thisImportDoc = document.currentScript.ownerDocument;
 
-        class Header extends HTMLElement {
+        class Chart extends HTMLElement {
             constructor() {
                 super();
+
+                let shadowRoot = this.attachShadow({mode: 'open'});
+                let template = Chart.template;
+                shadowRoot.appendChild(
+                    document.importNode(template.content, true)
+                );
             }
 
             static get template() {
                 if (!this._template) {
-                    this._template = thisImportDoc.querySelector('#app-header-template');
+                    this._template = thisImportDoc.querySelector('#payments-chart-template');
                 }
                 return this._template;
             }
 
             connectedCallback() {
-                console.log('app-header connected to page');
+                console.log('payments-chart connected to page');
 
-                let shadowRoot = this.attachShadow({mode: 'open'});
-                let template = Header.template;
-                shadowRoot.appendChild(
-                    document.importNode(template.content, true)
-                );
+
+
 
                 // Polyfill
                 const supportNativeShadowDom = !!HTMLElement.prototype.attachShadow;
@@ -51,8 +54,8 @@
             }
         }
 
-        ShadyCSS.prepareTemplate(Header.template, 'app-header');
+        ShadyCSS.prepareTemplate(Chart.template, 'payments-chart');
 
-        customElements.define('app-header', Header);
+        customElements.define('payments-chart', Chart);
     })();
 </script>

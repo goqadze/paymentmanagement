@@ -1,4 +1,4 @@
-<template id='payments-chart-template'>
+<template id='payment-item-template'>
     <style>
         :host {
             background: cornsilk;
@@ -14,7 +14,7 @@
     </style>
 
     <div id='content'>
-        <h2>Payments Chart</h2>
+        payment
     </div>
 </template>
 
@@ -22,27 +22,26 @@
     (function () {
         let thisImportDoc = document.currentScript.ownerDocument;
 
-        class Chart extends HTMLElement {
+        class Payment extends HTMLElement {
             constructor() {
                 super();
+
+                let shadowRoot = this.attachShadow({mode: 'open'});
+                let template = Payment.template;
+                shadowRoot.appendChild(
+                    document.importNode(template.content, true)
+                );
             }
 
             static get template() {
                 if (!this._template) {
-                    this._template = thisImportDoc.querySelector('#payments-chart-template');
+                    this._template = thisImportDoc.querySelector('#payment-item-template');
                 }
                 return this._template;
             }
 
             connectedCallback() {
-                console.log('payments-chart connected to page');
-
-                let shadowRoot = this.attachShadow({mode: 'open'});
-                let template = Chart.template;
-                shadowRoot.appendChild(
-                    document.importNode(template.content, true)
-                );
-
+                console.log('payment connected to page');
 
                 // Polyfill
                 const supportNativeShadowDom = !!HTMLElement.prototype.attachShadow;
@@ -52,8 +51,8 @@
             }
         }
 
-        ShadyCSS.prepareTemplate(Chart.template, 'payments-chart');
+        ShadyCSS.prepareTemplate(Payment.template, 'payment-item');
 
-        customElements.define('payments-chart', Chart);
+        customElements.define('payment-item', Payment);
     })();
 </script>
