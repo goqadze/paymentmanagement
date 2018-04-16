@@ -1,12 +1,11 @@
 <link rel="import" href="../custom-elements/switch-field/switch-category-field.html">
+<link rel="import" href="../custom-elements/search-input/search-input.html">
 
 <template id='payments-filter-template'>
     <style>
         :host {
-            background: cornsilk;
-            border: 1px solid goldenrod;
-            margin: 0;
-            max-height: 400px;
+            background: #d1ddeb;
+            margin: 0 auto;
             padding: 15px;
             display: none;
         }
@@ -17,7 +16,21 @@
 
         .form {
             display: flex;
+            flex-direction: column;
             width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .filter-section, .extended-filters {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+
+        .extended-filters {
+            display: flex;
+            flex-direction: row;
+            background: #f9f9fb;
         }
 
         switch-category-field {
@@ -33,7 +46,7 @@
         }
 
         .form-group .form-control {
-            width: 80%;
+            min-width: 150px;
         }
 
         .form-group.category > .form-control {
@@ -41,24 +54,79 @@
             margin-left: 8px;
         }
 
+        .filter-section {
+            background: #f9f9fb;
+            color: white;
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            padding: 10px;
+        }
+
+        .add-payment-btn {
+            padding:10px 5px 5px 5px;
+            font-size:20px;
+            cursor: pointer;
+            background: #f9f9fb;
+            color:#a7bedb;
+            border:none;
+            width: 220px;
+        }
+
+        .actions {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            margin-right: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .actions {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+
+        .extended-filters-toggle {
+            border:0;
+            font-size: 0.8rem;
+            background: #a7bedb;
+            margin-left: 10px;
+            text-transform: uppercase;
+            cursor: pointer;
+            color: #f9f9fb;
+            width: 150px;
+            height: 40px;
+            border-radius: 20px;
+        }
+
     </style>
 
-    <form class="form" id="test-form">
-        <div class="form-group category">
-            <h3 class="form-control">filter by amount</h3>
-            <switch-category-field class="form-control"  name="category_id" value="2"></switch-category-field>
+    <form class="form">
+        <div class="filter-section">
+            <button type="button" class="add-payment-btn">ADD PAYMENT</button>
+            <div class="actions">
+                <search-input name="title"></search-input>
+                <button type="button" class="extended-filters-toggle">extended filters</button>
+            </div>
         </div>
+        <div class="extended-filters">
+            <div class="form-group category">
+                <h3 class="form-control">filter by amount</h3>
+                <switch-category-field class="form-control" name="category_id" value="2"></switch-category-field>
+            </div>
 
-        <div class="form-group">
-            <h3 class="form-control">filter by date</h3>
-            <input type="date" name="start_date"  value="" class="form-control" placeholder="from">
-            <input type="date" name="end_date" value="" class="form-control" placeholder="to">
-        </div>
+            <div class="form-group">
+                <h3 class="form-control">filter by date</h3>
+                <input type="date" name="start_date" value="" class="form-control" placeholder="from">
+                <input type="date" name="end_date" value="" class="form-control" placeholder="to">
+            </div>
 
-        <div class="form-group">
-            <h3 class="form-control">filter by amount</h3>
-            <input type="text" name="min_amount" value="" class="form-control" placeholder="from">
-            <input type="text" name="max_amount" class="form-control" placeholder="to">
+            <div class="form-group">
+                <h3 class="form-control">filter by amount</h3>
+                <input type="text" name="min_amount" value="" class="form-control" placeholder="from">
+                <input type="text" name="max_amount" class="form-control" placeholder="to">
+            </div>
         </div>
     </form>
 </template>
@@ -88,13 +156,13 @@
             connectedCallback() {
                 console.log('payments-filter connected to page');
 
-                let testForm = this.shadowRoot.querySelector('#test-form');
+                let form = this.shadowRoot.querySelector('form');
 
 
-                testForm.onsubmit = function (event) {
+                form.onsubmit = function (event) {
                     event.preventDefault();
 
-                    let formData = new FormData(testForm);
+                    let formData = new FormData(form);
 
                     alert(formData.get('category_id'));
 

@@ -1,21 +1,30 @@
 <template id='app-footer-template'>
     <style>
         :host {
-            background: rebeccapurple;
-            border: 1px solid gold;
-            margin: 0;
-            max-height: 50px;
-            padding: 5px;
-            position: relative;
-            top: 0;
-            left: 0;
-            display: block;
+            width: 80%;
+            margin: 0 auto;
+            display: flex;
+        }
+
+        footer {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-bottom: 10px;
+            padding-top:10px;
+        }
+
+        h5 {
+            margin-top: 3px;
+            margin-bottom: 3px;
         }
     </style>
 
-    <div id='content'>
-        <h1>Footer</h1>
-    </div>
+    <footer class="site-header">
+        <h5>2018</h5>
+        <h5>payment management</h5>
+    </footer>
 </template>
 
 <script>

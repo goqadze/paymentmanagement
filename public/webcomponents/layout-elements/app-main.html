@@ -5,37 +5,49 @@
 <template id='main-template'>
     <style>
         :host {
-            background: cornsilk;
-            border: 1px solid goldenrod;
+            background: #f9f9fb;
             margin: 0;
             padding: 15px;
             display: flex;
             flex-direction: column;
         }
 
+        .list-and-charts-container {
+            display: flex;
+            flex-direction: column;
+        }
+
         @media (min-width: 768px) {
-            .list-and-charts{
+            .list-and-charts {
                 display: flex;
                 flex-direction: row;
             }
         }
 
-        .list-and-charts > payments-list{
-            flex: 5;
+        .list-and-charts {
+            margin-top: 15px;
         }
 
-        .list-and-charts > .charts{
+        .list-and-charts > payments-list {
+            flex: 5;
+            margin-right: 15px;
+        }
+
+        .list-and-charts > .charts {
             flex: 4;
         }
     </style>
 
     <div id='content'>
         <payments-filter visible></payments-filter>
-        <div class="list-and-charts">
-            <payments-list></payments-list>
-            <div class="charts">
-                <payments-chart></payments-chart>
-                <payments-chart></payments-chart>
+        <div class="list-and-charts-container">
+            <h1>4 records found</h1>
+            <div class="list-and-charts">
+                <payments-list></payments-list>
+                <div class="charts">
+                    <payments-chart></payments-chart>
+                    <payments-chart></payments-chart>
+                </div>
             </div>
         </div>
     </div>

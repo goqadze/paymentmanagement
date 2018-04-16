@@ -1,0 +1,100 @@
+<template id='search-input-template'>
+    <style>
+        input[type="search"]{
+            padding:10px 15px 10px 50px;
+            font-size:23px;
+            color:#a7bedb;
+            border:none;
+            width: 220px;
+            background-image:url(/images/search.png);
+            background-repeat:no-repeat;
+            background-size:23px 23px;
+            background-position:8px 12px;
+            background-color:#f9f9fb;
+            border-left: thin solid #bbbbbb;
+            border-right: thin solid #bbbbbb;
+        }
+        input[type="search"]::-webkit-input-placeholder{
+            color:#bbbbbb;
+        }
+        input[type="search"]:-moz-placeholder { /* Firefox 18- */
+            color: #bbbbbb;
+        }
+        input[type="search"]::-moz-placeholder {  /* Firefox 19+ */
+            color: #bbbbbb;
+        }
+        input[type="search"]:-ms-input-placeholder {  /* interner explorer*/
+            color: #bbbbbb;
+        }
+    </style>
+
+    <input type="search" placeholder="search.." />
+</template>
+
+<script>
+    (function () {
+        let thisImportDoc = document.currentScript.ownerDocument;
+
+        class SearchBox extends HTMLElement {
+            constructor() {
+                super();
+
+                let shadowRoot = this.attachShadow({mode: 'open'});
+                let template = SearchBox.template;
+                shadowRoot.appendChild(
+                    document.importNode(template.content, true)
+                );
+            }
+
+            static get template() {
+                if (!this._template) {
+                    this._template = thisImportDoc.querySelector('#search-input-template');
+                }
+                return this._template;
+            }
+
+            connectedCallback() {
+                console.log('search-input connected to page', this);
+
+                this.addRealHiddenInput();
+
+                const searchInput = this.shadowRoot.querySelector(`input[type="search"]`);
+
+                searchInput.addEventListener('input', evt => {
+                   console.log(evt.target.value);
+                   this.value = evt.target.value;
+                });
+
+                //------------------------------ Polyfill
+                const supportNativeShadowDom = !!HTMLElement.prototype.attachShadow;
+                if (!supportNativeShadowDom) {
+                    ShadyCSS.applyStyle(this);
+                }
+            }
+
+            addRealHiddenInput() {
+                let name = this.getAttribute('name');
+                this.realHiddenInput = document.createElement('input');
+                this.realHiddenInput.name = name;
+                this.value = this.getAttribute('value');
+                this.realHiddenInput.type = 'hidden';
+                this.realHiddenInput.tabIndex = -1;
+                this.appendChild(this.realHiddenInput);
+
+                console.log('input', this.realHiddenInput);
+            }
+
+            get value() {
+                return this.hasAttribute('value');
+            }
+
+            set value(val) {
+                this.realHiddenInput.value = val;
+            }
+        }
+
+        ShadyCSS.prepareTemplate(SearchBox.template, 'search-input');
+
+        customElements.define('search-input', SearchBox);
+    })();
+</script>

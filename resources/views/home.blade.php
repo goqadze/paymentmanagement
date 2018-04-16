@@ -8,28 +8,29 @@
     <title>Payments</title>
     <script src="/js/libs/polyfills/webcomponents-lite.js"></script>
 
-    <link rel="import" href="/webcomponents/test-component.html">
+    {{--<link rel="import" href="/webcomponents/test-component.html">--}}
     <link rel="import" href="/webcomponents/layout-elements/app-wrapper.html">
 
+    <link rel="stylesheet" href="/css/app.css">
 </head>
 <body>
     <app-wrapper></app-wrapper>
 
 
-    <test-component id="test" visible type="critical">
-        This is a payment item
+    {{--<test-component id="test" visible type="critical">--}}
+        {{--This is a payment item--}}
 
-        <span slot="title">Hey there!</span>
-    </test-component>
-    <button id="btn">Toggle</button>
+        {{--<span slot="title">Hey there!</span>--}}
+    {{--</test-component>--}}
+    {{--<button id="btn">Toggle</button>--}}
 
-    <script>
-        window.addEventListener('load', e => {
-            document.getElementById('btn').addEventListener('click', evt => {
-                let node = document.getElementById('test');
-                node.visible = !node.visible;
-            })
-        })
-    </script>
+    {{--<script>--}}
+        {{--window.addEventListener('load', e => {--}}
+            {{--document.getElementById('btn').addEventListener('click', evt => {--}}
+                {{--let node = document.getElementById('test');--}}
+                {{--node.visible = !node.visible;--}}
+            {{--})--}}
+        {{--})--}}
+    {{--</script>--}}
 </body>
 </html>

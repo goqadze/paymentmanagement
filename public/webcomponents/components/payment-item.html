@@ -1,20 +1,49 @@
 <template id='payment-item-template'>
     <style>
         :host {
-            background: cornsilk;
-            border: 1px solid goldenrod;
+            background: #f9f9fb;
             margin: 0;
             max-height: 400px;
             padding: 15px;
-            position: relative;
-            top: 0;
-            left: 0;
             display: block;
+            border-bottom: thin solid #bbbbbb;
+        }
+
+        #content {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .main-info {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .date-amount {
+            margin-left: auto;
+        }
+
+        .date-amount > p {
+            text-align: end;
         }
     </style>
 
     <div id='content'>
-        payment
+        <div class="main-info">
+            <div class="title-category">
+                <h4 class="title">title</h4>
+                <span class="category">category</span>
+            </div>
+            <div class="date-amount">
+                <p class="date">on sunday, 18 April 2017</p>
+                <p class="amount">-21.80</p>
+                <p>GEL</p>
+            </div>
+        </div>
+        <div class="comment">
+            <h3>Comment:</h3>
+            <p>comment comment comment comment comment comment </p>
+        </div>
     </div>
 </template>
 
