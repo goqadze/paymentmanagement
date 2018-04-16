@@ -31,18 +31,18 @@
     <div id='content'>
         <div class="main-info">
             <div class="title-category">
-                <h4 class="title">title</h4>
-                <span class="category">category</span>
+                <h4 class="title" id="title">title</h4>
+                <span class="category" id="category">category</span>
             </div>
             <div class="date-amount">
-                <p class="date">on sunday, 18 April 2017</p>
-                <p class="amount">-21.80</p>
+                <p class="date" id="date">on sunday, 18 April 2017</p>
+                <p class="amount" id="amount">-21.80</p>
                 <p>GEL</p>
             </div>
         </div>
         <div class="comment">
             <h3>Comment:</h3>
-            <p>comment comment comment comment comment comment </p>
+            <p id="comment">comment comment comment comment comment comment </p>
         </div>
     </div>
 </template>
@@ -72,7 +72,17 @@
             connectedCallback() {
                 console.log('payment connected to page');
 
-                // Polyfill
+                const keys = ['title', 'category', 'date', 'amount', 'comment'];
+                const content = this.shadowRoot.querySelector('#content');
+
+                Array.from(keys).forEach(key => {
+                    content.querySelector(`#${key}`).innerText = this.getAttribute(key);
+                });
+
+                this.polyFill();
+            }
+
+            polyFill() {
                 const supportNativeShadowDom = !!HTMLElement.prototype.attachShadow;
                 if (!supportNativeShadowDom) {
                     ShadyCSS.applyStyle(this);
@@ -81,7 +91,6 @@
         }
 
         ShadyCSS.prepareTemplate(Payment.template, 'payment-item');
-
         customElements.define('payment-item', Payment);
     })();
 </script>
