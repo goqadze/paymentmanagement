@@ -65,7 +65,10 @@
                    this.value = evt.target.value;
                 });
 
-                //------------------------------ Polyfill
+                this.polyFill();
+            }
+
+            polyFill() {
                 const supportNativeShadowDom = !!HTMLElement.prototype.attachShadow;
                 if (!supportNativeShadowDom) {
                     ShadyCSS.applyStyle(this);

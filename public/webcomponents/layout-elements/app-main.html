@@ -78,7 +78,10 @@
             connectedCallback() {
                 console.log('main connected to page');
 
-                // Polyfill
+                this.polyFill();
+            }
+
+            polyFill() {
                 const supportNativeShadowDom = !!HTMLElement.prototype.attachShadow;
                 if (!supportNativeShadowDom) {
                     ShadyCSS.applyStyle(this);

@@ -7,16 +7,25 @@
             margin: 0;
             padding: 15px;
             display: block;
+
+            max-height: 500px;
+            overflow-y: scroll;
         }
     </style>
 
     <div id='content'>
-        <payment-item title="asdasd" category="asdasdsfs" date="asdasd" amount="11.02" comment="wqeasda asdasd"></payment-item>
-        <payment-item title="asdasd" category="asdasdsfs" date="asdasd" amount="11.02" comment="wqeasda asdasd"></payment-item>
-        <payment-item title="asdasd" category="asdasdsfs" date="asdasd" amount="11.02" comment="wqeasda asdasd"></payment-item>
-        <payment-item title="asdasd" category="asdasdsfs" date="asdasd" amount="11.02" comment="wqeasda asdasd"></payment-item>
-        <payment-item title="asdasd" category="asdasdsfs" date="asdasd" amount="11.02" comment="wqeasda asdasd"></payment-item>
-        <payment-item title="asdasd" category="asdasdsfs" date="asdasd" amount="11.02" comment="wqeasda asdasd"></payment-item>
+        <payment-item title="asdasd" category="asdasdsfs" date="asdasd" amount="11.02"
+                      comment="wqeasda asdasd"></payment-item>
+        <payment-item title="asdasd" category="asdasdsfs" date="asdasd" amount="11.02"
+                      comment="wqeasda asdasd"></payment-item>
+        <payment-item title="asdasd" category="asdasdsfs" date="asdasd" amount="11.02"
+                      comment="wqeasda asdasd"></payment-item>
+        <payment-item title="asdasd" category="asdasdsfs" date="asdasd" amount="11.02"
+                      comment="wqeasda asdasd"></payment-item>
+        <payment-item title="asdasd" category="asdasdsfs" date="asdasd" amount="11.02"
+                      comment="wqeasda asdasd"></payment-item>
+        <payment-item title="asdasd" category="asdasdsfs" date="asdasd" amount="11.02"
+                      comment="wqeasda asdasd"></payment-item>
     </div>
 </template>
 
@@ -45,7 +54,10 @@
             connectedCallback() {
                 console.log('payments-list connected to page');
 
-                // Polyfill
+                this.polyFill();
+            }
+
+            polyFill() {
                 const supportNativeShadowDom = !!HTMLElement.prototype.attachShadow;
                 if (!supportNativeShadowDom) {
                     ShadyCSS.applyStyle(this);

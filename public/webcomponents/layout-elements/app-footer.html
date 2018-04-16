@@ -52,7 +52,10 @@
             connectedCallback() {
                 console.log('app-footer connected to page');
 
-                // Polyfill
+                this.polyFill();
+            }
+
+            polyFill() {
                 const supportNativeShadowDom = !!HTMLElement.prototype.attachShadow;
                 if (!supportNativeShadowDom) {
                     ShadyCSS.applyStyle(this);

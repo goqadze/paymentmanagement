@@ -21,10 +21,6 @@
             width: 80%;
             margin: 15px auto;
         }
-
-
-
-
     </style>
 
 
@@ -59,11 +55,13 @@
         }
 
         connectedCallback() {
-
             console.log(store);
             console.log('app wrapper connected to page');
 
-            // Polyfill
+            this.polyFill();
+        }
+
+        polyFill() {
             const supportNativeShadowDom = !!HTMLElement.prototype.attachShadow;
             if (!supportNativeShadowDom) {
                 ShadyCSS.applyStyle(this);
