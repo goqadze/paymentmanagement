@@ -7,7 +7,7 @@ const queryParams = (params) => {
 
 export const fetchPayments = (filter) => {
   const url = '/filter?' + queryParams(filter);
-  return fetch(url);
+  return fetch(url).then(res => res.json());
 };
 
 export const addPayment = (newPayment) => {
