@@ -51,7 +51,7 @@
 
     <div id="content">
         <div class="radio-input">
-            <input type="radio" id="input0" name="category_id" value="-1"/>
+            <input type="radio" id="input0" name="category_id" value="-1" checked/>
             <label for="input0">all</label>
         </div>
         <div class="radio-input">
@@ -89,8 +89,6 @@
                 super.connectedCallback();
                 console.log('switch-category-field connected to page', this);
 
-                this.value = this.getAttribute('value');
-
                 let content = this.shadowRoot.querySelector('#content');
                 let radioInputs = content.getElementsByTagName('input');
 
@@ -111,7 +109,7 @@
 
             set value(val) {
                 let input = this.shadowRoot.querySelector(`input[value="${val}"]`);
-                if (input){
+                if (input) {
                     input.checked = true;
                     this.setAttribute('value', val);
                     this.dispatchEvent(new Event('input'));
