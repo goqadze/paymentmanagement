@@ -40,13 +40,11 @@
 
                     payments.forEach(payment => {
                         const paymentElement = document.createElement('payment-item');
-                        console.log(payment)
                         paymentElement.setAttribute('title', payment.title);
                         paymentElement.setAttribute('date', payment.created_at);
                         paymentElement.setAttribute('category', payment.category_id);
                         paymentElement.setAttribute('amount', payment.amount);
                         paymentElement.setAttribute('comment', payment.comment);
-                        console.log(paymentElement);
                         content.appendChild(paymentElement);
                     })
 
