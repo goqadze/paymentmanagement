@@ -1,7 +1,6 @@
 import * as api from '../api/index.js';
 
-
-export const fetchPayments = (filter) => (dispatch, getState) => {
+export const fetchPayments = (filter = {}) => (dispatch, getState) => {
     dispatch({
         type: 'FETCH_PAYMENTS_REQUEST',
         filter
@@ -25,6 +24,8 @@ export const fetchPayments = (filter) => (dispatch, getState) => {
     );
 };
 
+window['fetchPaymentsAction'] = fetchPayments;
+
 export const addPayment = (newPayment) => (dispatch, getState) => {
     dispatch({
         type: 'ADD_PAYMENT_REQUEST',
@@ -47,3 +48,5 @@ export const addPayment = (newPayment) => (dispatch, getState) => {
         }
     );
 };
+
+window['addPaymentAction'] = addPayment;
