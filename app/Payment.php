@@ -32,4 +32,9 @@ class Payment extends Model
     {
         return $filters->apply($query);
     }
+
+    public function scopeWithCategoryTitle($query)
+    {
+        return $query->with('category:id,title');
+    }
 }

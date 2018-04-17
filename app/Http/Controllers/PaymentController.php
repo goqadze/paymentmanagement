@@ -16,9 +16,7 @@ class PaymentController extends Controller
      */
     public function index()
     {
-        return view('home', [
-            'payments' => Payment::latest()
-        ]);
+        return view('home');
     }
 
     /**
@@ -47,6 +45,6 @@ class PaymentController extends Controller
      */
     public function filter(PaymentFilters $filters)
     {
-        return Payment::latest()->filter($filters)->get();
+        return Payment::latest()->filter($filters)->withCategoryTitle()->get();
     }
 }

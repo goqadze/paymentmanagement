@@ -43,7 +43,7 @@
                         const paymentElement = document.createElement('payment-item');
                         paymentElement.setAttribute('title', payment.title);
                         paymentElement.setAttribute('date', payment.created_at);
-                        paymentElement.setAttribute('category', payment.category_id);
+                        paymentElement.setAttribute('category', payment.category.title);
                         paymentElement.setAttribute('amount', payment.amount);
                         paymentElement.setAttribute('comment', payment.comment);
                         content.appendChild(paymentElement);
