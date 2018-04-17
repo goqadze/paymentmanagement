@@ -40,6 +40,13 @@
             connectedCallback() {
                 super.connectedCallback()
                 console.log('payments-list connected to page');
+
+                store.subscribe(() => {
+                    if(store.getState().lastAction !== 'FETCH_PAYMENTS_SUCCESS')
+                        return;
+
+                    console.log('render payments', store.getState().payments) 
+                })
             }
         }
 
