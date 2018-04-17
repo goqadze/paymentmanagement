@@ -64,8 +64,8 @@
                 const content = this.shadowRoot.querySelector('#content');
 
                 Array.from(keys).forEach(key => {
-                    const element =  content.querySelector(`#${key}`);
-                    if (element){
+                    const element = content.querySelector(`#${key}`);
+                    if (element) {
                         element.innerText = this.getAttribute(key);
                     }
                 });

@@ -2,34 +2,38 @@
 
 <template id='search-input-template'>
     <style>
-        input[type="search"]{
-            padding:10px 15px 10px 50px;
-            font-size:23px;
-            color:#a7bedb;
-            border:none;
+        input[type="search"] {
+            padding: 10px 15px 10px 50px;
+            font-size: 23px;
+            color: #a7bedb;
+            border: none;
             width: 220px;
-            background-image:url(/images/search.png);
-            background-repeat:no-repeat;
-            background-size:23px 23px;
-            background-position:8px 12px;
-            background-color:#f9f9fb;
+            background-image: url(/images/search.png);
+            background-repeat: no-repeat;
+            background-size: 23px 23px;
+            background-position: 8px 12px;
+            background-color: #f9f9fb;
             border-left: thin solid #bbbbbb;
             border-right: thin solid #bbbbbb;
         }
-        input[type="search"]::-webkit-input-placeholder{
-            color:#bbbbbb;
+
+        input[type="search"]::-webkit-input-placeholder {
+            color: #bbbbbb;
         }
+
         input[type="search"]:-moz-placeholder { /* Firefox 18- */
             color: #bbbbbb;
         }
-        input[type="search"]::-moz-placeholder {  /* Firefox 19+ */
+
+        input[type="search"]::-moz-placeholder { /* Firefox 19+ */
             color: #bbbbbb;
         }
-        input[type="search"]:-ms-input-placeholder {  /* interner explorer*/
+
+        input[type="search"]:-ms-input-placeholder { /* interner explorer*/
             color: #bbbbbb;
         }
     </style>
-    <input type="search" placeholder="search.." />
+    <input type="search" placeholder="search.."/>
 </template>
 
 <script>
@@ -46,7 +50,7 @@
                 const searchInput = this.shadowRoot.querySelector(`input[type="search"]`);
 
                 searchInput.addEventListener('input', evt => {
-                   this.value = evt.target.value;
+                    this.value = evt.target.value;
                 });
             }
 
