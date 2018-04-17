@@ -29,7 +29,6 @@
             color: #bbbbbb;
         }
     </style>
-
     <input type="search" placeholder="search.." />
 </template>
 
@@ -44,34 +43,27 @@
                 super.connectedCallback();
                 console.log('search-input connected to page', this);
 
-                this.addRealHiddenInput();
-
                 const searchInput = this.shadowRoot.querySelector(`input[type="search"]`);
 
                 searchInput.addEventListener('input', evt => {
-                   console.log(evt.target.value);
                    this.value = evt.target.value;
                 });
             }
 
-            addRealHiddenInput() {
-                let name = this.getAttribute('name');
-                this.realHiddenInput = document.createElement('input');
-                this.realHiddenInput.name = name;
-                this.value = this.getAttribute('value');
-                this.realHiddenInput.type = 'hidden';
-                this.realHiddenInput.tabIndex = -1;
-                this.appendChild(this.realHiddenInput);
-
-                console.log('input', this.realHiddenInput);
+            get name() {
+                return this.getAttribute('name');
             }
 
+
             get value() {
-                return this.hasAttribute('value');
+                return this.getAttribute('value');
             }
 
             set value(val) {
-                this.realHiddenInput.value = val;
+                this.setAttribute('value', val);
+//                if (val.toString().length > 2){
+//                    this.dispatchEvent(new Event('input'));
+//                }
             }
         }
 

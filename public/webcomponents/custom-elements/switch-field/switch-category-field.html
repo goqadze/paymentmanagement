@@ -81,40 +81,30 @@
                 super.connectedCallback();
                 console.log('switch-category-field connected to page', this);
 
-                this.addRealHiddenInput();
-            }
-
-            addRealHiddenInput() {
-                let name = this.getAttribute('name');
-                this.realHiddenInput = document.createElement('input');
-                this.realHiddenInput.name = name;
-                this.value = this.getAttribute('value');
-                this.realHiddenInput.type = 'hidden';
-                this.realHiddenInput.tabIndex = -1;
-                this.appendChild(this.realHiddenInput);
-
-                console.log('input', this.realHiddenInput);
-
                 let content = this.shadowRoot.querySelector('#content');
-
                 let radioInputs = content.getElementsByTagName('input');
 
                 Array.from(radioInputs).forEach((el) => {
                     el.addEventListener('click', evt => {
-                        this.realHiddenInput.value = evt.target.value;
+                        this.value = evt.target.value;
                     });
                 });
             }
 
+            get name() {
+                return this.getAttribute('name');
+            }
+
             get value() {
-                return this.hasAttribute('value');
+                return this.getAttribute('value');
             }
 
             set value(val) {
-                this.realHiddenInput.value = val;
                 let input = this.shadowRoot.querySelector(`input[value="${val}"]`);
                 if (input){
                     input.checked = true;
+                    this.setAttribute('value', val);
+                    this.dispatchEvent(new Event('input'));
                 }
             }
         }

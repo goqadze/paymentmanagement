@@ -107,26 +107,26 @@
         <div class="filter-section">
             <button type="button" class="add-payment-btn">ADD PAYMENT</button>
             <div class="actions">
-                <search-input name="title"></search-input>
+                <search-input name="title" class="input"></search-input>
                 <button type="button" class="extended-filters-toggle">extended filters</button>
             </div>
         </div>
         <div class="extended-filters">
             <div class="form-group category">
                 <h3 class="form-control">filter by amount</h3>
-                <switch-category-field class="form-control" name="category_id" value="2"></switch-category-field>
+                <switch-category-field class="form-control input" name="category_id" value="2"></switch-category-field>
             </div>
 
             <div class="form-group">
                 <h3 class="form-control">filter by date</h3>
-                <input type="date" name="start_date" value="" class="form-control" placeholder="from">
-                <input type="date" name="end_date" value="" class="form-control" placeholder="to">
+                <input type="date" name="start_date" value="" class="form-control input" placeholder="from">
+                <input type="date" name="end_date" value="" class="form-control input" placeholder="to">
             </div>
 
             <div class="form-group">
                 <h3 class="form-control">filter by amount</h3>
-                <input type="text" name="min_amount" value="" class="form-control" placeholder="from">
-                <input type="text" name="max_amount" class="form-control" placeholder="to">
+                <input type="text" name="min_amount" value="" class="form-control input" placeholder="from">
+                <input type="text" name="max_amount" class="form-control input" placeholder="to">
             </div>
         </div>
     </form>
@@ -144,8 +144,17 @@
 
                 console.log('payments-filter connected to page');
 
-                let form = this.shadowRoot.querySelector('form');
+                const form = this.shadowRoot.querySelector('form');
+                const inputs = form.getElementsByClassName('input');
 
+                Array.from(inputs).forEach(input => {
+                    input.addEventListener('input', evt => {
+                        console.log(evt.target.name, evt.target.value);
+                        
+                        const formData = new FormData(form);
+                        store.dispatch(fetchPaymentsAction(formData));
+                    });
+                });
 
                 form.onsubmit = function (event) {
                     event.preventDefault();
