@@ -1,0 +1,46 @@
+<script>
+    class CustomHTMLElement extends HTMLElement {
+        constructor() {
+            super();
+            let shadowRoot = this.attachShadow({mode: 'open'});
+            let template = this.constructor.template;
+            shadowRoot.appendChild(
+                document.importNode(template.content, true)
+            );
+        }
+
+        static get importDoc() {
+            return this._importDoc;
+        }
+
+        static set importDoc(doc) {
+            this._importDoc = doc;
+        }
+
+        static get templateId() {
+            return this._templateId;
+        }
+
+        static set templateId(id) {
+            this._templateId = id;
+        }
+
+        static get template() {
+            if (!this._template) {
+                this._template = this.importDoc.querySelector(`#${this.templateId}`);
+            }
+            return this._template;
+        }
+
+        connectedCallback() {
+            this.polyFill();
+        }
+
+        polyFill() {
+            const supportNativeShadowDom = !!HTMLElement.prototype.attachShadow;
+            if (!supportNativeShadowDom) {
+                ShadyCSS.applyStyle(this);
+            }
+        }
+    }
+</script>

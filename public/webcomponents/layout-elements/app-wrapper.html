@@ -1,6 +1,7 @@
 <link rel="import" href="./app-header.html">
 <link rel="import" href="./app-main.html">
 <link rel="import" href="./app-footer.html">
+<link rel="import" href="../custom-html-element.html">
 
 <template id='app-wrapper-template'>
     <style>
@@ -33,43 +34,23 @@
 <script type="module" src="../../js/store/index.js"></script>
 
 <script>
-
-    let thisImportDoc = document.currentScript.ownerDocument;
-
-    class App extends HTMLElement {
+    class App extends CustomHTMLElement {
         constructor() {
             super();
-
-            let shadowRoot = this.attachShadow({mode: 'open'});
-            let template = App.template;
-            shadowRoot.appendChild(
-                document.importNode(template.content, true)
-            );
-        }
-
-        static get template() {
-            if (!this._template) {
-                this._template = thisImportDoc.querySelector('#app-wrapper-template');
-            }
-            return this._template;
         }
 
         connectedCallback() {
+            super.connectedCallback();
+
             console.log(store);
             console.log('app wrapper connected to page');
-
-            this.polyFill();
-        }
-
-        polyFill() {
-            const supportNativeShadowDom = !!HTMLElement.prototype.attachShadow;
-            if (!supportNativeShadowDom) {
-                ShadyCSS.applyStyle(this);
-            }
         }
     }
 
+    let thisImportDoc = document.currentScript.ownerDocument;
     window.addEventListener('load', () => {
+        App.templateId = 'app-wrapper-template';
+        App.importDoc = thisImportDoc;
         ShadyCSS.prepareTemplate(App.template, 'app-wrapper');
         customElements.define('app-wrapper', App);
     });

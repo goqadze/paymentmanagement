@@ -1,8 +1,9 @@
 <link rel="import" href="../components/payments-filter.html">
 <link rel="import" href="../components/payments-list.html">
 <link rel="import" href="../components/payments-chart.html">
+<link rel="import" href="../custom-html-element.html">
 
-<template id='main-template'>
+<template id='app-main-template'>
     <style>
         :host {
             background: #f9f9fb;
@@ -55,42 +56,21 @@
 
 <script>
     (function () {
-        let thisImportDoc = document.currentScript.ownerDocument;
-
-        class Main extends HTMLElement {
+        class Main extends CustomHTMLElement {
             constructor() {
                 super();
-
-                let shadowRoot = this.attachShadow({mode: 'open'});
-                let template = Main.template;
-                shadowRoot.appendChild(
-                    document.importNode(template.content, true)
-                );
-            }
-
-            static get template() {
-                if (!this._template) {
-                    this._template = thisImportDoc.querySelector('#main-template');
-                }
-                return this._template;
             }
 
             connectedCallback() {
+                super.connectedCallback();
                 console.log('main connected to page');
-
-                this.polyFill();
-            }
-
-            polyFill() {
-                const supportNativeShadowDom = !!HTMLElement.prototype.attachShadow;
-                if (!supportNativeShadowDom) {
-                    ShadyCSS.applyStyle(this);
-                }
             }
         }
 
+        let thisImportDoc = document.currentScript.ownerDocument;
+        Main.templateId = 'app-main-template';
+        Main.importDoc = thisImportDoc;
         ShadyCSS.prepareTemplate(Main.template, 'app-main');
-
         customElements.define('app-main', Main);
     })();
 </script>
