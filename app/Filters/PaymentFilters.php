@@ -39,6 +39,6 @@ class PaymentFilters extends Filters
 
     protected function category_id($value)
     {
-        return $this->builder->orderBy('category_id', $value);
+        return $this->builder->where('category_id', $value);
     }
 }
