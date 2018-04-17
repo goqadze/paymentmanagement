@@ -15,18 +15,8 @@
     </style>
 
     <div id='content'>
-        <payment-item title="asdasd" category="asdasdsfs" date="asdasd" amount="11.02"
-                      comment="wqeasda asdasd"></payment-item>
-        <payment-item title="asdasd" category="asdasdsfs" date="asdasd" amount="11.02"
-                      comment="wqeasda asdasd"></payment-item>
-        <payment-item title="asdasd" category="asdasdsfs" date="asdasd" amount="11.02"
-                      comment="wqeasda asdasd"></payment-item>
-        <payment-item title="asdasd" category="asdasdsfs" date="asdasd" amount="11.02"
-                      comment="wqeasda asdasd"></payment-item>
-        <payment-item title="asdasd" category="asdasdsfs" date="asdasd" amount="11.02"
-                      comment="wqeasda asdasd"></payment-item>
-        <payment-item title="asdasd" category="asdasdsfs" date="asdasd" amount="11.02"
-                      comment="wqeasda asdasd"></payment-item>
+        <!-- <payment-item title="asdasd" category="asdasdsfs" date="asdasd" amount="11.02" -->
+        <!--               comment="wqeasda asdasd"></payment-item> -->
     </div>
 </template>
 
@@ -45,7 +35,21 @@
                     if(store.getState().lastAction !== 'FETCH_PAYMENTS_SUCCESS')
                         return;
 
-                    console.log('render payments', store.getState().payments) 
+                    const content = this.shadowRoot.querySelector('#content');
+                    const payments = store.getState().payments;
+
+                    payments.forEach(payment => {
+                        const paymentElement = document.createElement('payment-item');
+                        console.log(payment)
+                        paymentElement.setAttribute('title', payment.title);
+                        paymentElement.setAttribute('date', payment.created_at);
+                        paymentElement.setAttribute('category', payment.category_id);
+                        paymentElement.setAttribute('amount', payment.amount);
+                        paymentElement.setAttribute('comment', payment.comment);
+                        console.log(paymentElement);
+                        content.appendChild(paymentElement);
+                    })
+
                 })
             }
         }
