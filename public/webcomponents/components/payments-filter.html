@@ -114,7 +114,7 @@
         <div class="extended-filters">
             <div class="form-group category">
                 <h3 class="form-control">filter by amount</h3>
-                <switch-category-field class="form-control input" name="category_id" value="2"></switch-category-field>
+                <switch-category-field class="form-control input" name="category_id" value="-1"></switch-category-field>
             </div>
 
             <div class="form-group">
@@ -125,8 +125,8 @@
 
             <div class="form-group">
                 <h3 class="form-control">filter by amount</h3>
-                <input type="text" name="min_amount" value="" class="form-control input" placeholder="from">
-                <input type="text" name="max_amount" class="form-control input" placeholder="to">
+                <input type="number" name="min_amount" class="form-control input" placeholder="from">
+                <input type="number" name="max_amount" class="form-control input" placeholder="to">
             </div>
         </div>
     </form>
@@ -141,7 +141,6 @@
 
             connectedCallback() {
                 super.connectedCallback();
-
                 console.log('payments-filter connected to page');
 
                 const form = this.shadowRoot.querySelector('form');
@@ -149,29 +148,22 @@
 
                 Array.from(inputs).forEach(input => {
                     input.addEventListener('input', evt => {
-                        console.log(evt.target.name, evt.target.value);
-                        
+
                         let filterData = this.getFilterData(inputs);
+
                         store.dispatch(fetchPaymentsAction(filterData));
+
                     });
                 });
-
-               // form.onsubmit = function (event) {
-               //     event.preventDefault();
-
-               //     let formData = new FormData(form);
-
-               //     alert(formData.get('category_id'));
-
-               //     console.log(formData);
-               // };
             }
 
             getFilterData(inputs) {
                 return Array.from(inputs).reduce((acc, cur) => {
-                    acc[cur['name']] = cur['value'] || '';
+                    if (!! cur['value']){
+                        acc[cur['name']] = cur['value'];
+                    }
                     return acc;
-                }, {})
+                }, {});
             }
 
             get visible() {

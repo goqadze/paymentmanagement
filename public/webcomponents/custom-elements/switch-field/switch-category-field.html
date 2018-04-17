@@ -47,6 +47,10 @@
 
     <div id="content">
         <div class="radio-input">
+            <input type="radio" id="input0" name="category_id" value="-1"/>
+            <label for="input0">all</label>
+        </div>
+        <div class="radio-input">
             <input type="radio" id="input1" name="category_id" value="1"/>
             <label for="input1">mobile services</label>
         </div>
@@ -80,6 +84,8 @@
             connectedCallback() {
                 super.connectedCallback();
                 console.log('switch-category-field connected to page', this);
+
+                this.value = this.getAttribute('value');
 
                 let content = this.shadowRoot.querySelector('#content');
                 let radioInputs = content.getElementsByTagName('input');

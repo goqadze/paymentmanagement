@@ -14,7 +14,7 @@ class PaymentFilters extends Filters
 
     protected function title($value)
     {
-        return $this->builder->where('title',  'LIKE', "%{$value}%");
+        return $this->builder->where('title',  'LiKE', "%{$value}%");
     }
 
     protected function start_date($value)
@@ -39,6 +39,9 @@ class PaymentFilters extends Filters
 
     protected function category_id($value)
     {
+        if ($value <= 0)
+            return $this->builder;
+
         return $this->builder->where('category_id', $value);
     }
 }
