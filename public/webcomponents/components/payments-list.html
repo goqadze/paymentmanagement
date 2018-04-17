@@ -36,6 +36,7 @@
                         return;
 
                     const content = this.shadowRoot.querySelector('#content');
+                    content.innerHTML = '';
                     const payments = store.getState().payments;
 
                     payments.forEach(payment => {

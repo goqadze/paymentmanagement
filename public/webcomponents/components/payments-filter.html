@@ -151,20 +151,27 @@
                     input.addEventListener('input', evt => {
                         console.log(evt.target.name, evt.target.value);
                         
-                        const formData = new FormData(form);
-                        store.dispatch(fetchPaymentsAction(formData));
+                        let filterData = this.getFilterData(inputs);
+                        store.dispatch(fetchPaymentsAction(filterData));
                     });
                 });
 
-                form.onsubmit = function (event) {
-                    event.preventDefault();
+               // form.onsubmit = function (event) {
+               //     event.preventDefault();
 
-                    let formData = new FormData(form);
+               //     let formData = new FormData(form);
 
-                    alert(formData.get('category_id'));
+               //     alert(formData.get('category_id'));
 
-                    console.log(formData);
-                };
+               //     console.log(formData);
+               // };
+            }
+
+            getFilterData(inputs) {
+                return Array.from(inputs).reduce((acc, cur) => {
+                    acc[cur['name']] = cur['value'];
+                    return acc;
+                }, {})
             }
 
             get visible() {
