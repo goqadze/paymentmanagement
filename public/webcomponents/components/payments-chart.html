@@ -22,7 +22,7 @@
 
     </style>
 
-    <h1>pet Month</h1>
+    <h1>Per Month</h1>
     <div id='chart'>
         <chart-column height="40" amount="30.20" month="Jan"></chart-column>
         <chart-column height="50" amount="35.20" month="Feb"></chart-column>
@@ -44,13 +44,17 @@
         class Chart extends CustomHTMLElement {
             constructor() {
                 super();
+                this._payments = [];
             }
 
             connectedCallback() {
                 super.connectedCallback();
                 console.log('payments-chart connected to page');
-                
-                store.dispatch(fetchCurrentYearPaymentsAction());
+            }
+
+            set payments(ps) {
+                this._payments = ps;
+                console.log('set payments', this._payments);
             }
         }
 

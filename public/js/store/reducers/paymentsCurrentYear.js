@@ -1,4 +1,4 @@
-const payments = (state = [], action) => {
+const paymentsCurrentYear = (state = [], action) => {
     switch (action.type) {
         case 'FETCH_CURRENT_YEAR_PAYMENTS_SUCCESS':
             return action.response.slice();
@@ -7,4 +7,4 @@ const payments = (state = [], action) => {
     }
 };
 
-export default payments;
+export default paymentsCurrentYear;

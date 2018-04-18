@@ -1,6 +1,7 @@
 import isAdding from './isAdding.js';
 import isFetching from './isFetching.js';
 import payments from './payments.js';
+import paymentsCurrentYear from './paymentsCurrentYear.js';
 import lastAction from './lastAction.js';
 
 const combineReducers = (reducers) => {
@@ -18,6 +19,7 @@ const paymentApp = combineReducers({
     isAdding,
     isFetching,
     payments,
+    paymentsCurrentYear,
     lastAction,
 });
 
