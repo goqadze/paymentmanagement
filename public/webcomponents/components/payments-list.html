@@ -10,7 +10,7 @@
 
         #content {
             display: block;
-            max-height: 500px;
+            max-height: 563px;
             overflow-y: scroll;
         }
 
@@ -18,22 +18,17 @@
             background: #a1c3ff;
             display: flex;
             justify-content: flex-end;
-        }
-
-        .total-spent > div {
-            display: flex;
             flex-direction: column;
-            justify-content: flex-end;
         }
 
-        .total-spent > div > p {
+        .total-spent > p {
             margin: 5px 10px 5px 5px;
             color: #f9f9fb;
             font-size: 15px;
             text-align: end;
         }
 
-        .total-spent > div > #total-spent-value {
+        .total-spent > #total-spent-value {
             font-size: 19px;
         }
     </style>
@@ -43,10 +38,8 @@
         <!--               comment="wqeasda asdasd"></payment-item> -->
     </div>
     <div class="total-spent">
-        <div>
-            <p> Total </p>
-            <p id="total-spent-value"> 40.30 </p>
-        </div>
+        <p> Total </p>
+        <p id="total-spent-value"> 40.30 </p>
     </div>
 </template>
 

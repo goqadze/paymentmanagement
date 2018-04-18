@@ -1,5 +1,6 @@
 <?php
 
+use Carbon\Carbon;
 use Faker\Generator as Faker;
 
 /*
@@ -14,9 +15,13 @@ use Faker\Generator as Faker;
 */
 
 $factory->define(App\Payment::class, function (Faker $faker) {
+
+    $date = Carbon::create(2018, 1, 1, 0, 0, 0);
+
     return [
         'title' => $faker->jobTitle,
         'comment' => $faker->text,
         'amount' => $faker->numberBetween(1, 1000),
+        'created_at' => $date->addWeeks(rand(1, 52))->format('Y-m-d H:i:s')
     ];
 });

@@ -16,7 +16,7 @@
             flex-direction: row;
             align-items: flex-end;
             justify-content: space-around;
-            height: 120px;
+            height: 200px;
             background: green;
         }
 
@@ -45,6 +45,7 @@
             constructor() {
                 super();
                 this._payments = [];
+                this.columnMaxHeight = 150;
             }
 
             connectedCallback() {
@@ -52,9 +53,40 @@
                 console.log('payments-chart connected to page');
             }
 
+            get payments() {
+                return this._payments;
+            }
+
             set payments(ps) {
                 this._payments = ps;
-                console.log('set payments', this._payments);
+
+                const amountsByMonth = this.groupAmountsByMonth();
+                const heightFractions = this.getChartColumnsHeightFractions(amountsByMonth);
+
+                const columns = this.shadowRoot.querySelector('#chart').children;
+                Array.from(columns).forEach((column, index) => {
+                    column.height = heightFractions[index] * this.columnMaxHeight;
+                })
+            }
+
+            groupAmountsByMonth() {
+                return this.payments.reduce((acc, cur) => {
+                    const date = new Date(cur.created_at);
+                    const month = date.getMonth();
+
+                    if (!acc[month])
+                        acc[month] = +cur.amount;
+                    else
+                        acc[month] += +cur.amount;
+
+                    return acc;
+                }, []);
+            }
+
+            getChartColumnsHeightFractions(amounts) {
+                const maxAmount = Math.max(...amounts);
+
+                return amounts.map(amount => amount / maxAmount);
             }
         }
 
