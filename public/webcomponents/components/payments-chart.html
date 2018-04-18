@@ -53,6 +53,10 @@
                 console.log('payments-chart connected to page');
             }
 
+            get type() {
+                return this.getAttribute('type');
+            }
+
             get payments() {
                 return this._payments;
             }
@@ -80,7 +84,7 @@
                         acc[month] += +cur.amount;
 
                     return acc;
-                }, []);
+                }, Array(12).fill(0) );
             }
 
             getChartColumnsHeightFractions(amounts) {

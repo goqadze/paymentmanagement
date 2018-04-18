@@ -171,7 +171,7 @@
 
                         let filterData = this.getFilterData(inputs);
 
-                        store.dispatch(fetchPaymentsAction(filterData));
+                        store.dispatch(actions.fetchPayments(filterData));
                     });
                 });
 

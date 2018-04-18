@@ -1,13 +1,16 @@
 import * as api from '../api/index.js';
 
+let actions = {};
+window['actions'] = actions;
+
 export const fetchCurrentYearPayments = () => {
     const filter = {
         min_date: new Date(new Date().getFullYear(), 0, 1)
     };
     return fetchPayments(filter, 'FETCH_CURRENT_YEAR_PAYMENTS');
-}
+};
 
-window['fetchCurrentYearPaymentsAction'] = fetchCurrentYearPayments;
+actions['fetchCurrentYearPayments'] = fetchCurrentYearPayments;
 
 export const fetchPayments = (filter = {}, type = 'FETCH_PAYMENTS') => (dispatch, getState) => {
     dispatch({
@@ -33,14 +36,13 @@ export const fetchPayments = (filter = {}, type = 'FETCH_PAYMENTS') => (dispatch
     );
 };
 
-window['fetchPaymentsAction'] = fetchPayments;
+actions['fetchPayments'] = fetchPayments;
 
 export const addPayment = (newPayment) => (dispatch, getState) => {
     dispatch({
         type: 'ADD_PAYMENT_REQUEST',
         filter
     });
-
 
     return api.addPayment(newPayment).then(
         response => {
@@ -58,4 +60,4 @@ export const addPayment = (newPayment) => (dispatch, getState) => {
     );
 };
 
-window['addPaymentAction'] = addPayment;
+actions['addPayment'] = addPayment;

@@ -113,6 +113,10 @@
                     input.checked = true;
                     this.setAttribute('value', val);
                     this.dispatchEvent(new Event('input'));
+                    store.dispatch({
+                       type: 'CATEGORY_CHANGED',
+                       category_id: val
+                    });
                 }
             }
         }

@@ -69,22 +69,28 @@
             }
 
             setChartsData() {
-                store.dispatch(fetchCurrentYearPaymentsAction());
+                store.dispatch(actions.fetchCurrentYearPayments());
 
                 store.subscribe(() => {
-                    if (store.getState().lastAction !== 'FETCH_CURRENT_YEAR_PAYMENTS_SUCCESS')
-                        return;
+                    const state = store.getState();
 
-                    const payments = store.getState().paymentsCurrentYear;
+                    const lastAction = state.lastAction;
+                    if (lastAction === 'FETCH_CURRENT_YEAR_PAYMENTS_SUCCESS' ||
+                        lastAction === 'CATEGORY_CHANGED'){
 
-                    const chartsContainer = this.shadowRoot.querySelector('.charts');
-                    const charts = chartsContainer.getElementsByTagName('payments-chart');
+                        const payments = state.paymentsCurrentYear;
 
-                    Array.from(charts).forEach((chart) => {
-                        chart.payments = payments;
-                    });
+                        const chartsContainer = this.shadowRoot.querySelector('.charts');
+                        const charts = chartsContainer.getElementsByTagName('payments-chart');
 
-                })
+                        Array.from(charts).forEach((chart) => {
+                            if (chart.type === 'PER_CATEGORY')
+                                chart.payments = payments.filter(p => p.category.id === state.selectedCategory);
+                            else
+                                chart.payments = payments;
+                        });
+                    }
+                });
             }
         }
 
