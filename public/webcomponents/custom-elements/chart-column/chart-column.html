@@ -42,8 +42,6 @@
             width:100%;
             background: yellow;
         }
-
-
     </style>
 
     <div id="content">
@@ -63,10 +61,6 @@
         connectedCallback() {
             super.connectedCallback();
             console.log('chart-column connected to page');
-
-            this.height = this.getAttribute('height');
-            this.amount = this.getAttribute('amount');
-            this.month = this.getAttribute('month');
         }
 
         set height(value) {
@@ -74,8 +68,8 @@
             column.setAttribute('style',`min-height: ${value}px`);
 
             const content = this.shadowRoot.querySelector('#content');
-            content.setAttribute('style',`height: ${+value + 20}px`);
-
+            const monthEl = this.shadowRoot.querySelector('#month');
+            content.setAttribute('style',`height: ${+value + monthEl.offsetHeight}px`);
         }
 
         set amount(value) {
