@@ -27,7 +27,7 @@
 
     </style>
 
-    <h1>Per Month</h1>
+    <h1 id="title">Per Month</h1>
     <div id='chart'>
         <chart-column height="40" amount="30.20" month="Jan"></chart-column>
         <chart-column height="50" amount="35.20" month="Feb"></chart-column>
@@ -56,6 +56,8 @@
             connectedCallback() {
                 super.connectedCallback();
                 console.log('payments-chart connected to page');
+
+                this.shadowRoot.querySelector('#title').innerHTML = this.getAttribute('title');
             }
 
             get type() {
@@ -87,6 +89,7 @@
                 const columns = this.shadowRoot.querySelector('#chart').children;
                 Array.from(columns).forEach((column, index) => {
                     column.height = heightFractions[index] * this.columnMaxHeight;
+                    column.amount = amountsByMonth[index].toFixed(2);
                 })
             }
 
@@ -101,7 +104,7 @@
                         acc[month] += +cur.amount;
 
                     return acc;
-                }, Array(12).fill(0) );
+                }, Array(12).fill(0));
             }
 
             getChartColumnsHeightFractions(amounts) {
