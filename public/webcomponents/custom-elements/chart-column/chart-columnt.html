@@ -3,24 +3,50 @@
 <template id='chart-column-template'>
     <style>
         :host {
-            height: 100px;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            height: 100px;
-            background: grey;
+            padding: 0;
+            margin: 0;
+            height: 100%;
             width: 6%;
-        } 
-
-        :host(:hover) {
-            background-color: red;
+            background: red;
+            display: flex;
+            align-items: flex-end; 
         }
 
+        #content {
+            background: tomato;
+            margin: 0px auto;
+
+            color: white;
+            overflow:hidden;
+
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            justify-content:flex-end;
+            height:80px;
+            width: 50px;
+        }
+
+
+        p {
+            margin:0;
+        }
+
+        #column {
+            min-height:50px;
+            width:100%;
+            background: yellow;
+        }
+
+
     </style>
-    <p id="amount">95.50</p>
-    <div id="column">
+
+    <div id="content">
+        <p id="amount">95.50</p>
+        <div id="column"> </div>
+        <p id="month">Jan</p>
     </div>
-    <p id="month"></p>
+
 </template>
 <script>
 (function () {
