@@ -7,15 +7,18 @@
             display: flex;
             flex-direction: column;
             align-items: flex-end;
-            background-color: blue;
+            height: 100px;
+            background: grey;
+            width: 6%;
         } 
 
-        :host:hover {
+        :host(:hover) {
             background-color: red;
         }
+
     </style>
     <p id="amount">95.50</p>
-    <div class="column">
+    <div id="column">
     </div>
     <p id="month"></p>
 </template>

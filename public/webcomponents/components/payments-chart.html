@@ -1,4 +1,5 @@
 <link rel="import" href="../custom-html-element.html">
+<link rel="import" href="../custom-elements/chart-column/chart-columnt.html">
 
 <template id='payments-chart-template'>
     <style>
@@ -19,27 +20,22 @@
             background: green;
         }
 
-        #chart .chart-col {
-            height: 100px;
-            background: grey;
-            width: 6%;
-        }
     </style>
 
     <h1>pet Month</h1>
     <div id='chart'>
-        <div class='chart-col' style='height: 50px'></div>
-        <div class='chart-col' style='height: 70px'></div>
-        <div class='chart-col' style='height: 60px'></div>
-        <div class='chart-col' style='height: 30px'></div>
-        <div class='chart-col' style='height: 90px'></div>
-        <div class='chart-col' style='height: 50px'></div>
-        <div class='chart-col' style='height: 10px'></div>
-        <div class='chart-col' style='height: 50px'></div>
-        <div class='chart-col' style='height: 30px'></div>
-        <div class='chart-col' style='height: 50px'></div>
-        <div class='chart-col' style='height: 60px'></div>
-        <div class='chart-col' style='height: 60px'></div>
+        <chart-column></chart-column>
+        <chart-column></chart-column>
+        <chart-column></chart-column>
+        <chart-column></chart-column>
+        <chart-column></chart-column>
+        <chart-column></chart-column>
+        <chart-column></chart-column>
+        <chart-column></chart-column>
+        <chart-column></chart-column>
+        <chart-column></chart-column>
+        <chart-column></chart-column>
+        <chart-column></chart-column>
     </div>
 </template>
 
