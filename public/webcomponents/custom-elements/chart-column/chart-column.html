@@ -26,6 +26,11 @@
             height:80px;
             width: 50px;
         }
+        
+        #content:hover {
+            background: green;
+            height: 100% !important;
+        }
 
 
         p {
@@ -57,7 +62,30 @@
 
         connectedCallback() {
             super.connectedCallback();
-            console.log('chart-column connected to page', this);
+            console.log('chart-column connected to page');
+
+            this.height = this.getAttribute('height');
+            this.amount = this.getAttribute('amount');
+            this.month = this.getAttribute('month');
+        }
+
+        set height(value) {
+            const column = this.shadowRoot.querySelector('#column');
+            column.setAttribute('style',`min-height: ${value}px`);
+
+            const content = this.shadowRoot.querySelector('#content');
+            content.setAttribute('style',`height: ${+value + 20}px`);
+
+        }
+
+        set amount(value) {
+            const amount = this.shadowRoot.querySelector('#amount');
+            amount.innerHTML = value;
+        }
+
+        set month(value) {
+            const month = this.shadowRoot.querySelector('#month');
+            month.innerHTML = value;
         }
     }
 
