@@ -10,6 +10,7 @@
 
     {{--<link rel="import" href="/webcomponents/test-component.html">--}}
     <link rel="import" href="/webcomponents/layout-elements/app-wrapper.html">
+    <link rel="import" href="/webcomponents/components/payment-add.html">
 
     <link rel="stylesheet" href="/css/app.css">
 </head>
@@ -18,11 +19,7 @@
 
     <div id="add-payment" class="overlay">
         <div class="popup">
-            <h2>Add new payment</h2>
-            <a class="close" href="#">&times;</a>
-            <div class="content">
-                Thank to pop me out of that button, but now i'm done so you can close this window.
-            </div>
+            <add-payment></add-payment>
         </div>
     </div>
 </body>
