@@ -42,7 +42,7 @@
     <div id='content'>
         <payments-filter visible></payments-filter>
         <div class="list-and-charts-container">
-            <h1>4 records found</h1>
+            <h1 id="records-count">4 records found</h1>
             <div class="list-and-charts">
                 <payments-list></payments-list>
                 <div class="charts">
@@ -65,6 +65,7 @@
                 super.connectedCallback();
                 console.log('main connected to page');
 
+                this.setRecordsCount();
                 this.setChartsData();
             }
 
@@ -97,6 +98,18 @@
                             }
                         });
                     }
+                });
+            }
+
+            setRecordsCount() {
+                store.subscribe(() => {
+                    const lastAction = store.getState().lastAction;
+
+                    if (lastAction !== 'FETCH_PAYMENTS_SUCCESS')
+                        return;
+
+                    const recordsCount = store.getState().payments.length;
+                    this.shadowRoot.querySelector('#records-count').innerHTML = `${recordsCount} records found`;
                 });
             }
         }
