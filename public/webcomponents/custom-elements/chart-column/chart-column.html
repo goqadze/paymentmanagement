@@ -73,7 +73,7 @@
 
             const content = this.shadowRoot.querySelector('#content');
             const monthEl = this.shadowRoot.querySelector('#month');
-            content.setAttribute('style',`height: ${+value + monthEl.offsetHeight}px`);
+            content.setAttribute('style',`height: ${+column.offsetHeight + monthEl.offsetHeight}px`);
         }
 
         set amount(value) {
