@@ -86,8 +86,8 @@
                         Array.from(charts).forEach((chart) => {
                             if (chart.type === 'PER_CATEGORY'){
                                 if (state.selectedCategory !== -1){
-                                    chart.payments = payments.filter(p => p.category.id === state.selectedCategory);
                                     chart.visible = true;
+                                    chart.payments = payments.filter(p => p.category.id === state.selectedCategory);
                                 } else {
                                     chart.visible = false;
                                 }
