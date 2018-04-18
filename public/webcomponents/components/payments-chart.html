@@ -8,7 +8,12 @@
             margin: 0;
             max-height: 400px;
             padding: 15px;
-            display: block;
+            display: none;
+            flex-direction: column;
+        }
+
+        :host([visible]) {
+            display: flex;
         }
 
         #chart {
@@ -55,6 +60,18 @@
 
             get type() {
                 return this.getAttribute('type');
+            }
+
+            get visible() {
+                return this.hasAttribute('visible');
+            }
+
+            set visible(val) {
+                if (val) {
+                    this.setAttribute('visible', '');
+                } else {
+                    this.removeAttribute('visible');
+                }
             }
 
             get payments() {

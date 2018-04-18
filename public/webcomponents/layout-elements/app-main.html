@@ -46,7 +46,7 @@
             <div class="list-and-charts">
                 <payments-list></payments-list>
                 <div class="charts">
-                    <payments-chart type="PER_MONTH"></payments-chart>
+                    <payments-chart type="PER_MONTH" visible></payments-chart>
                     <payments-chart type="PER_CATEGORY"></payments-chart>
                 </div>
             </div>
@@ -84,10 +84,17 @@
                         const charts = chartsContainer.getElementsByTagName('payments-chart');
 
                         Array.from(charts).forEach((chart) => {
-                            if (chart.type === 'PER_CATEGORY')
-                                chart.payments = payments.filter(p => p.category.id === state.selectedCategory);
-                            else
+                            if (chart.type === 'PER_CATEGORY'){
+                                if (state.selectedCategory !== -1){
+                                    chart.payments = payments.filter(p => p.category.id === state.selectedCategory);
+                                    chart.visible = true;
+                                } else {
+                                    chart.visible = false;
+                                }
+                            }
+                            else {
                                 chart.payments = payments;
+                            }
                         });
                     }
                 });
