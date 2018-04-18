@@ -1,22 +1,31 @@
 import * as api from '../api/index.js';
 
-export const fetchPayments = (filter = {}) => (dispatch, getState) => {
+export const fetchCurrentYearPayments = () => {
+    const filter = {
+        min_date: new Date(new Date().getFullYear(), 0, 1)
+    };
+    return fetchPayments(filter, 'FETCH_CURRENT_YEAR_PAYMENTS');
+}
+
+window['fetchCurrentYearPaymentsAction'] = fetchCurrentYearPayments;
+
+export const fetchPayments = (filter = {}, type = 'FETCH_PAYMENTS') => (dispatch, getState) => {
     dispatch({
-        type: 'FETCH_PAYMENTS_REQUEST',
+        type: `${type}_REQUEST`,
         filter
     });
 
     return api.fetchPayments(filter).then(
         response => {
             dispatch({
-                type: 'FETCH_PAYMENTS_SUCCESS',
+                type: `${type}_SUCCESS`,
                 filter,
                 response
             });
         },
         error => {
             dispatch({
-                type: 'FETCH_PAYMENTS_FAILURE',
+                type: `${type}_FAILURE`,
                 filter,
                 error: error || 'Something went wrong.',
             });

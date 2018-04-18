@@ -49,6 +49,8 @@
             connectedCallback() {
                 super.connectedCallback();
                 console.log('payments-chart connected to page');
+                
+                store.dispatch(fetchCurrentYearPaymentsAction());
             }
         }
 

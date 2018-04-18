@@ -61,6 +61,8 @@
                 super.connectedCallback();
                 console.log('payments-list connected to page');
 
+                store.dispatch(fetchPaymentsAction());
+
                 store.subscribe(() => {
                     if (store.getState().lastAction !== 'FETCH_PAYMENTS_SUCCESS')
                         return;
