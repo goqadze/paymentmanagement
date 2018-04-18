@@ -1,5 +1,6 @@
 <link rel="import" href="../custom-elements/switch-field/switch-category-field.html">
 <link rel="import" href="../custom-elements/search-input/search-input.html">
+<link rel="import" href="./payment-add.html">
 <link rel="import" href="../custom-html-element.html">
 
 <template id='payments-filter-template'>
@@ -74,6 +75,7 @@
             font-size: 20px;
             cursor: pointer;
             background: #f9f9fb;
+            text-decoration: none;
             color: #a7bedb;
             border: none;
             width: 220px;
@@ -85,7 +87,8 @@
         .add-payment-btn > .circle {
             border: 1px solid #a7bedb;
             border-radius: 50%;
-            font-size: 27px;
+            font-size: 20px;
+            text-align: center;
             width: 30px;
             height: 30px;
             margin-right: 5px;
@@ -117,15 +120,18 @@
             height: 40px;
             border-radius: 20px;
         }
-
     </style>
+
+
+
+
 
     <form class="form">
         <div class="filter-section">
-            <button type="button" class="add-payment-btn">
+            <a  href="#add-payment" class="add-payment-btn">
                 <span class="circle">+</span>
                 <span>ADD PAYMENT</span>
-            </button>
+            </a>
             <div class="actions">
                 <search-input name="title" class="input"></search-input>
                 <button type="button" class="extended-filters-toggle">extended filters</button>
@@ -150,6 +156,7 @@
             </div>
         </div>
     </form>
+
 </template>
 
 <script>

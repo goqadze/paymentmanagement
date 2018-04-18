@@ -16,21 +16,14 @@
 <body>
     <app-wrapper></app-wrapper>
 
-
-    {{--<test-component id="test" visible type="critical">--}}
-        {{--This is a payment item--}}
-
-        {{--<span slot="title">Hey there!</span>--}}
-    {{--</test-component>--}}
-    {{--<button id="btn">Toggle</button>--}}
-
-    {{--<script>--}}
-        {{--window.addEventListener('load', e => {--}}
-            {{--document.getElementById('btn').addEventListener('click', evt => {--}}
-                {{--let node = document.getElementById('test');--}}
-                {{--node.visible = !node.visible;--}}
-            {{--})--}}
-        {{--})--}}
-    {{--</script>--}}
+    <div id="add-payment" class="overlay">
+        <div class="popup">
+            <h2>Add new payment</h2>
+            <a class="close" href="#">&times;</a>
+            <div class="content">
+                Thank to pop me out of that button, but now i'm done so you can close this window.
+            </div>
+        </div>
+    </div>
 </body>
 </html>
