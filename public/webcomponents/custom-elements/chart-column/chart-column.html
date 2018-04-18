@@ -61,6 +61,10 @@
         connectedCallback() {
             super.connectedCallback();
             console.log('chart-column connected to page');
+
+            this.height = this.getAttribute('height');
+            this.amount = this.getAttribute('amount');
+            this.month = this.getAttribute('month');
         }
 
         set height(value) {
