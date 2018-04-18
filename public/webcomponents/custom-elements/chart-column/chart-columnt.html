@@ -1,0 +1,41 @@
+<link rel="import" href="../../custom-html-element.html">
+
+<template id='chart-column-template'>
+    <style>
+        :host {
+            height: 100px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            background-color: blue;
+        } 
+
+        :host:hover {
+            background-color: red;
+        }
+    </style>
+    <p id="amount">95.50</p>
+    <div class="column">
+    </div>
+    <p id="month"></p>
+</template>
+<script>
+(function () {
+    class ChartColumn extends CustomHTMLElement {
+        constructor() {
+            super();
+        }
+
+        connectedCallback() {
+            super.connectedCallback();
+            console.log('chart-column connected to page', this);
+        }
+    }
+
+    let thisImportDoc = document.currentScript.ownerDocument;
+    ChartColumn.templateId = 'chart-column-template';
+    ChartColumn.importDoc = thisImportDoc;
+    ShadyCSS.prepareTemplate(ChartColumn.template, 'chart-column');
+    customElements.define('chart-column', ChartColumn);
+})();
+</script>
