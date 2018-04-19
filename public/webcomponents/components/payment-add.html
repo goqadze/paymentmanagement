@@ -126,6 +126,43 @@
             connectedCallback() {
                 super.connectedCallback();
                 console.log('add payment connected to page');
+
+                const form = this.shadowRoot.querySelector('form');
+
+                form.addEventListener('submit', evt => {
+                    evt.preventDefault();
+
+                    const formData = new FormData(form);
+
+                    store.dispatch(actions.addPayment(formData));
+                });
+
+                store.subscribe(() => {
+                    const state = store.getState();
+                    const lastAction = state.lastAction;
+
+                    switch (lastAction) {
+                        case 'ADD_PAYMENT_SUCCESS':
+                            this.clearForm();
+                            this.showSuccessMessage();
+                            break;
+                        case 'ADD_PAYMENT_FAILED':
+                            this.showErrorMessages(state.errorMessages);
+                            break;
+                    }
+                });
+            }
+
+            showSuccessMessage() {
+
+            }
+
+            clearForm() {
+
+            }
+
+            showErrorMessages(errors) {
+
             }
         }
 
