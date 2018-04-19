@@ -13,7 +13,7 @@
             position: absolute;
             top: 20px;
             right: 30px;
-            transition: all 200ms;
+            transition: all 20ms;
             font-size: 30px;
             font-weight: bold;
             text-decoration: none;
@@ -25,8 +25,6 @@
         }
 
         .content {
-            max-height: 30%;
-            overflow: auto;
             display: flex;
             flex-direction: column;
         }
@@ -39,18 +37,31 @@
             flex-direction: column;
         }
 
+        
+
+        input, textarea {
+            width: 60px;
+            background: #fff;
+            color: #a3a3a3;
+            font: inherit;
+            border: thin solid grey;
+            outline: 0;
+            padding: 22px 18px;
+        }
+
+
     </style>
 
     <h2>Add new payment</h2>
     <a class="close" href="#">&times;</a>
     <div class="content">
-        <form action="payment-add_submit" method="post" accept-charset="utf-8">
+        <form action="/store" method="post" accept-charset="utf-8">
             <div class="form-group">
-                <div class="form-control">
+                <div class="form-control title">
                     <label>label</label> 
                     <input type="text" value="value" name="" id=""/>
                 </div> 
-                <div class="form-control">
+                <div class="form-control amount">
                     <label>label</label> 
                     <input type="text" value="value" name="" id=""/>
                 </div> 
@@ -70,9 +81,11 @@
             <div class="form-group">
                 <div class="form-control">
                     <label>label</label> 
-                    <input type="text" value="value" name="" id=""/>
+                    <textarea name="comment"></textarea>
                 </div> 
             </div>
+
+            <button type="submit">Create</button>
         </form>
     </div>
 </template>
