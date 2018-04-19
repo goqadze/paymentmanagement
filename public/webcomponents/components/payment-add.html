@@ -2,13 +2,11 @@
 
 <template id='add-payment-template'>
     <style>
-
         h2 {
             margin-top: 0;
             color: #333;
             font-family: Tahoma, Arial, sans-serif;
         }
-
         .close {
             position: absolute;
             top: 20px;
@@ -19,7 +17,6 @@
             text-decoration: none;
             color: #333;
         }
-
         .close:hover {
             color: #06d85f;
         }
@@ -73,6 +70,7 @@
             cursor: pointer;
         }
 
+        /*Success styling */
         .success-msg {
             color: #270;
             background-color: #DFF2BF;
@@ -84,17 +82,39 @@
             padding: 10px;
             border-radius: 3px;
         }
-
         .visible {
             display: block;
             opacity: 1;
             transition: opacity 2s linear;
         }
-
         .hidden {
             display: none;
             opacity: 0;
             transition: visibility 0s 2s, opacity 2s linear;
+        }
+
+        /* Error Styling */
+        .error-message {
+            color: #cc0033;
+            display: inline-block;
+            font-size: 12px;
+            line-height: 15px;
+            margin: 5px 0 0;
+        }
+
+        .form-control .error-message {
+            display: none;
+        }
+        .error label {
+            color: #cc0033;
+        }
+        .error input,textarea {
+            background-color: #fce4e4;
+            border: 1px solid #cc0033;
+            outline: none;
+        }
+        .error .error-message {
+            display: inline-block;
         }
     </style>
 
@@ -108,34 +128,34 @@
             <div class="form-group">
                 <div class="form-control title">
                     <label for="title">Title</label> 
-                    <input type="text" value="" name="title" id="title"/>
-                    <span class="error" id="title-error"></span>
+                    <input type="text" name="title" id="title"/>
+                    <span class="error"></span>
                 </div> 
                 <div class="form-control amount">
                     <label for="amount">Amount</label> 
-                    <input type="text" value="" name="amount" id="amount"/>
-                    <span class="error" id="amount-error"></span>
+                    <input type="text" name="amount" id="amount"/>
+                    <span class="error"></span>
                 </div> 
             </div>
             <div class="form-group">
                 <div class="form-control">
                     <label for="category_id">Category</label> 
-                    <input type="text" value="" name="category_id" id="category_id"/>
-                    <span class="error" id="category_id-error"></span>
+                    <input type="text" name="category_id" id="category_id"/>
+                    <span class="error"></span>
                 </div> 
             </div>
             <div class="form-group">
                 <div class="form-control">
                     <label for="created_at">Date</label> 
-                    <input type="date" value="" name="created_at" id="created_at"/>
-                    <span class="error" id="created_at-error"></span>
+                    <input type="date" name="created_at" id="created_at"/>
+                    <span class="error"></span>
                 </div> 
             </div>
             <div class="form-group">
                 <div class="form-control">
                     <label for="comment">Comment</label> 
                     <textarea name="comment"></textarea>
-                    <span class="error" id="comment-error"></span>
+                    <span class="error"></span>
                 </div> 
             </div>
             <button type="submit" id="submit-btn">Create</button>
