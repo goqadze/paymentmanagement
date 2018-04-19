@@ -23,7 +23,6 @@
         .close:hover {
             color: #06d85f;
         }
-
         .content {
             display: flex;
             flex-direction: column;
@@ -35,18 +34,24 @@
         .content .form-group .form-control{
             display:flex;
             flex-direction: column;
+            margin:5px;
+            width: 90%;
         }
-
+        .content .form-group .form-control.title{
+            width: 50%;
+        }
         
-
+        .content .form-group .form-control.amount{
+            width: 30%;
+        }
         input, textarea {
-            width: 60px;
+            width: 100%;
             background: #fff;
             color: #a3a3a3;
             font: inherit;
             border: thin solid grey;
             outline: 0;
-            padding: 22px 18px;
+            padding: 12px 8px;
         }
 
 
@@ -58,30 +63,35 @@
         <form action="/store" method="post" accept-charset="utf-8">
             <div class="form-group">
                 <div class="form-control title">
-                    <label>Title</label> 
+                    <label for="title">Title</label> 
                     <input type="text" value="" name="title" id="title"/>
+                    <span class="error" id="title-error"></span>
                 </div> 
                 <div class="form-control amount">
-                    <label>Amount</label> 
+                    <label for="amount">Amount</label> 
                     <input type="text" value="" name="amount" id="amount"/>
+                    <span class="error" id="amount-error"></span>
                 </div> 
             </div>
             <div class="form-group">
                 <div class="form-control">
-                    <label>Category</label> 
-                    <input type="text" value="" name="category_id" id="category"/>
+                    <label for="category_id">Category</label> 
+                    <input type="text" value="" name="category_id" id="category_id"/>
+                    <span class="error" id="category_id-error"></span>
                 </div> 
             </div>
             <div class="form-group">
                 <div class="form-control">
-                    <label>Date</label> 
-                    <input type="date" value="" name="created_at" id="date"/>
+                    <label for="created_at">Date</label> 
+                    <input type="date" value="" name="created_at" id="created_at"/>
+                    <span class="error" id="created_at-error"></span>
                 </div> 
             </div>
             <div class="form-group">
                 <div class="form-control">
-                    <label>Comment</label> 
+                    <label for="comment">Comment</label> 
                     <textarea name="comment"></textarea>
+                    <span class="error" id="comment-error"></span>
                 </div> 
             </div>
 
