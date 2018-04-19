@@ -4,6 +4,7 @@ import selectedCategory from './selectedCategory.js';
 import payments from './payments.js';
 import paymentsCurrentYear from './paymentsCurrentYear.js';
 import lastAction from './lastAction.js';
+import errorMessages from './errorMessages.js';
 
 const combineReducers = (reducers) => {
     return (state = {}, action) => {
@@ -23,6 +24,7 @@ const paymentApp = combineReducers({
     payments,
     paymentsCurrentYear,
     lastAction,
+    errorMessages
 });
 
 export default paymentApp;
@@ -33,4 +35,5 @@ export const getSelectedCategory = (state) => state.selectedCategory;
 export const getPayments = (state) => state.payments;
 export const getPaymentsCurrentYear = (state) => state.paymentsCurrentYear;
 export const getLastAction = (state) => state.lastAction;
+export const getErrorMessages = (state) => state.errorMessages;
 

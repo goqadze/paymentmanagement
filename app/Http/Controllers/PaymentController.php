@@ -32,6 +32,7 @@ class PaymentController extends Controller
             'amount' => 'required|numeric|min:0.01',
             'comment' => 'required|min:4',
             'category_id' => 'required|exists:categories,id',
+            'created_at' => 'required|date',
         ]);
 
         if ($validator->fails()) {

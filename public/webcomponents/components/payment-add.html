@@ -56,7 +56,7 @@
             width: 30%;
         }
 
-        input, textarea {
+        input, textarea, select, select {
             width: 100%;
             background: #fff;
             color: #a3a3a3;
@@ -64,6 +64,7 @@
             border: thin solid grey;
             outline: 0;
             padding: 12px 8px;
+            box-sizing: border-box;
         }
 
         #submit-btn {
@@ -113,7 +114,7 @@
             color: #cc0033;
             display: inline-block;
             font-size: 12px;
-            line-height: 15px;
+            line-height: 13px;
             margin: 5px 0 0;
         }
 
@@ -125,7 +126,7 @@
             color: #cc0033;
         }
 
-        .error input, .error textarea {
+        .error input, .error textarea, .error select {
             background-color: #fce4e4;
             border: 1px solid #cc0033;
             outline: none;
@@ -144,7 +145,7 @@
         </p>
         <form action="/store" method="post" accept-charset="utf-8">
             <div class="form-group">
-                <div class="form-control title error">
+                <div class="form-control title">
                     <label for="title">Title</label>
                     <input type="text" name="title" id="title"/>
                     <span class="error-message">Title is as required field</span>
@@ -158,7 +159,13 @@
             <div class="form-group">
                 <div class="form-control">
                     <label for="category_id">Category</label>
-                    <input type="text" name="category_id" id="category_id"/>
+                    <select name="category_id" id="category_id">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
                     <span class="error-message"></span>
                 </div>
             </div>
@@ -193,11 +200,14 @@
                 console.log('add payment connected to page');
 
                 const form = this.shadowRoot.querySelector('form');
+                this.form = form;
 
                 form.addEventListener('submit', evt => {
                     evt.preventDefault();
 
                     const formData = new FormData(form);
+
+                    this.clearErrors();
 
                     store.dispatch(actions.addPayment(formData));
                 });
@@ -211,7 +221,7 @@
                             this.clearForm();
                             this.showSuccessMessage();
                             break;
-                        case 'ADD_PAYMENT_FAILED':
+                        case 'ADD_PAYMENT_FAILURE':
                             this.showErrorMessages(state.errorMessages);
                             break;
                     }
@@ -222,15 +232,41 @@
                 const successMsg = this.shadowRoot.querySelector('.success-msg');
 
                 successMsg.classList.remove('fadeInOut');
-                setTimeout(() => { successMsg.classList.add('fadeInOut'); }, 0);
+                setTimeout(() => {
+                    successMsg.classList.add('fadeInOut');
+                }, 0);
             }
 
             clearForm() {
+                const inputs = this.form.querySelectorAll('input, select, textarea');
+                Array.from(inputs).forEach(el => {
+                    if (el.tagName === 'textarea')
+                        el.innerHTML = '';
+                    else
+                        el.value = '';
+                    el.parentElement.classList.remove('error');
+                })
+            }
 
+            clearErrors() {
+                const inputs = this.form.querySelectorAll('input, select, textarea');
+                Array.from(inputs).forEach(el => {
+                    el.parentElement.classList.remove('error');
+                })
             }
 
             showErrorMessages(errors) {
+                Object.keys(errors).forEach(key => {
+                    const inputEl = this.shadowRoot.querySelector(`#${key}`);
+                    if (!!inputEl) {
+                        const parentEl = inputEl.parentElement;
 
+                        parentEl.classList.add('error');
+
+                        const errorMsgEl = parentEl.querySelector('.error-message');
+                        errorMsgEl.innerHTML = errors[key][0];
+                    }
+                });
             }
         }
 
