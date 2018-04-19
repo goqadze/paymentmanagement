@@ -2,6 +2,7 @@
 <link rel="import" href="./app-main.html">
 <link rel="import" href="./app-footer.html">
 <link rel="import" href="../custom-html-element.html">
+<link rel="import" href="../components/payment-add.html">
 
 <template id='app-wrapper-template'>
     <style>
@@ -44,10 +45,13 @@
 
             console.log(store);
             console.log('app wrapper connected to page');
+
+            const popupEl = document.querySelector('#add-payment .popup');
+            popupEl.appendChild(document.createElement('add-payment'));
         }
     }
 
-    let thisImportDoc = document.currentScript.ownerDocument;
+    const thisImportDoc = document.currentScript.ownerDocument;
     window.addEventListener('load', () => {
         App.templateId = 'app-wrapper-template';
         App.importDoc = thisImportDoc;

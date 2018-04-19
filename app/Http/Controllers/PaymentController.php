@@ -34,7 +34,7 @@ class PaymentController extends Controller
             'category_id' => 'required|exists:categories,id',
         ]);
 
-        return Payment::create($request->all());
+        return Payment::create($request->all())->loadCategory();
     }
 
     /**
@@ -45,6 +45,6 @@ class PaymentController extends Controller
      */
     public function filter(PaymentFilters $filters)
     {
-        return Payment::latest()->filter($filters)->withCategoryTitle()->get();
+        return Payment::latest()->filter($filters)->withCategory()->get();
     }
 }

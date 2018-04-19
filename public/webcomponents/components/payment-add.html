@@ -9,6 +9,7 @@
             margin-bottom: 3px;
             margin-left: 6px;
         }
+
         .close {
             position: absolute;
             top: 20px;
@@ -19,35 +20,42 @@
             text-decoration: none;
             color: #333;
         }
+
         .close:hover {
             color: #06d85f;
         }
+
         .content {
             display: flex;
             flex-direction: column;
         }
+
         form {
             display: flex;
             flex-direction: column;
         }
-        .form-group{
-            display:flex;
+
+        .form-group {
+            display: flex;
             flex-direction: row;
         }
-        .form-control{
-            display:flex;
+
+        .form-control {
+            display: flex;
             flex-direction: column;
-            margin:5px;
+            margin: 5px;
             width: 90%;
         }
-        .form-control.title{
+
+        .form-control.title {
             width: 50%;
             margin-right: 9%;
         }
-        
-        .content .form-group .form-control.amount{
+
+        .content .form-group .form-control.amount {
             width: 30%;
         }
+
         input, textarea {
             width: 100%;
             background: #fff;
@@ -90,8 +98,14 @@
         }
 
         @keyframes fadeinout {
-          0%, 100%{ acity: 0; visibility: hidden; }
-          3%, 90% { opacity: 1; visibility:visible;  }
+            0%, 100% {
+                opacity: 0;
+                visibility: hidden;
+            }
+            3%, 90% {
+                opacity: 1;
+                visibility: visible;
+            }
         }
 
         /* Error Styling */
@@ -106,14 +120,17 @@
         .form-control .error-message {
             display: none;
         }
+
         .error label {
             color: #cc0033;
         }
+
         .error input, .error textarea {
             background-color: #fce4e4;
             border: 1px solid #cc0033;
             outline: none;
         }
+
         .error .error-message {
             display: inline-block;
         }
@@ -123,41 +140,41 @@
     <a class="close" href="#">&times;</a>
     <div class="content">
         <p class="success-msg">
-           Payment was added successfully 
+            Payment was added successfully
         </p>
         <form action="/store" method="post" accept-charset="utf-8">
             <div class="form-group">
                 <div class="form-control title error">
-                    <label for="title">Title</label> 
+                    <label for="title">Title</label>
                     <input type="text" name="title" id="title"/>
                     <span class="error-message">Title is as required field</span>
-                </div> 
+                </div>
                 <div class="form-control amount">
-                    <label for="amount">Amount</label> 
-                    <input type="text" name="amount" id="amount"/>
+                    <label for="amount">Amount</label>
+                    <input type="number" step="0.01" name="amount" id="amount"/>
                     <span class="error-message"></span>
-                </div> 
+                </div>
             </div>
             <div class="form-group">
                 <div class="form-control">
-                    <label for="category_id">Category</label> 
+                    <label for="category_id">Category</label>
                     <input type="text" name="category_id" id="category_id"/>
                     <span class="error-message"></span>
-                </div> 
+                </div>
             </div>
             <div class="form-group">
                 <div class="form-control">
-                    <label for="created_at">Date</label> 
+                    <label for="created_at">Date</label>
                     <input type="date" name="created_at" id="created_at"/>
                     <span class="error-message"></span>
-                </div> 
+                </div>
             </div>
             <div class="form-group">
                 <div class="form-control">
-                    <label for="comment">Comment</label> 
-                    <textarea name="comment"></textarea>
+                    <label for="comment">Comment</label>
+                    <textarea name="comment" id="comment"></textarea>
                     <span class="error-message"></span>
-                </div> 
+                </div>
             </div>
             <button type="submit" id="submit-btn">Create</button>
         </form>
@@ -180,29 +197,24 @@
                 form.addEventListener('submit', evt => {
                     evt.preventDefault();
 
-                    this.showSuccessMessage();
-                    return;
-
                     const formData = new FormData(form);
 
                     store.dispatch(actions.addPayment(formData));
                 });
 
-                window.addEventListener('load', () => {
-                    store.subscribe(() => {
-                        const state = store.getState();
-                        const lastAction = state.lastAction;
+                store.subscribe(() => {
+                    const state = store.getState();
+                    const lastAction = state.lastAction;
 
-                        switch (lastAction) {
-                            case 'ADD_PAYMENT_SUCCESS':
-                                this.clearForm();
-                                this.showSuccessMessage();
-                                break;
-                            case 'ADD_PAYMENT_FAILED':
-                                this.showErrorMessages(state.errorMessages);
-                                break;
-                        }
-                    });
+                    switch (lastAction) {
+                        case 'ADD_PAYMENT_SUCCESS':
+                            this.clearForm();
+                            this.showSuccessMessage();
+                            break;
+                        case 'ADD_PAYMENT_FAILED':
+                            this.showErrorMessages(state.errorMessages);
+                            break;
+                    }
                 });
             }
 
@@ -210,7 +222,7 @@
                 const successMsg = this.shadowRoot.querySelector('.success-msg');
 
                 successMsg.classList.remove('fadeInOut');
-                successMsg.classList.add('fadeInOut');
+                setTimeout(() => { successMsg.classList.add('fadeInOut'); }, 0);
             }
 
             clearForm() {

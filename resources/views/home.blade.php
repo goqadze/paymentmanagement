@@ -9,8 +9,6 @@
     <script src="/js/libs/polyfills/webcomponents-lite.js"></script>
 
     <link rel="import" href="/webcomponents/layout-elements/app-wrapper.html">
-    <link rel="import" href="/webcomponents/components/payment-add.html">
-
     <link rel="stylesheet" href="/css/app.css">
 </head>
 <body>
@@ -18,7 +16,6 @@
 
     <div id="add-payment" class="overlay">
         <div class="popup">
-            <add-payment></add-payment>
         </div>
     </div>
 </body>

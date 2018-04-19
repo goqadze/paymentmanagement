@@ -41,7 +41,7 @@ actions['fetchPayments'] = fetchPayments;
 export const addPayment = (newPayment) => (dispatch, getState) => {
     dispatch({
         type: 'ADD_PAYMENT_REQUEST',
-        filter
+        newPayment
     });
 
     return api.addPayment(newPayment).then(

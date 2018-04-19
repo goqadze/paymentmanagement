@@ -76,28 +76,28 @@
                     const state = store.getState();
 
                     const lastAction = state.lastAction;
-                    if (lastAction === 'FETCH_CURRENT_YEAR_PAYMENTS_SUCCESS' ||
-                        lastAction === 'CATEGORY_CHANGED'){
+                    if (!['FETCH_CURRENT_YEAR_PAYMENTS_SUCCESS', 'CATEGORY_CHANGED', 'ADD_PAYMENT_SUCCESS']
+                        .includes(lastAction))
+                        return;
 
-                        const payments = state.paymentsCurrentYear;
+                    const payments = state.paymentsCurrentYear;
 
-                        const chartsContainer = this.shadowRoot.querySelector('.charts');
-                        const charts = chartsContainer.getElementsByTagName('payments-chart');
+                    const chartsContainer = this.shadowRoot.querySelector('.charts');
+                    const charts = chartsContainer.getElementsByTagName('payments-chart');
 
-                        Array.from(charts).forEach((chart) => {
-                            if (chart.type === 'PER_CATEGORY'){
-                                if (state.selectedCategory !== -1){
-                                    chart.visible = true;
-                                    chart.payments = payments.filter(p => p.category.id === state.selectedCategory);
-                                } else {
-                                    chart.visible = false;
-                                }
+                    Array.from(charts).forEach((chart) => {
+                        if (chart.type === 'PER_CATEGORY') {
+                            if (state.selectedCategory !== -1) {
+                                chart.visible = true;
+                                chart.payments = payments.filter(p => p.category.id === state.selectedCategory);
+                            } else {
+                                chart.visible = false;
                             }
-                            else {
-                                chart.payments = payments;
-                            }
-                        });
-                    }
+                        }
+                        else {
+                            chart.payments = payments;
+                        }
+                    });
                 });
             }
 
@@ -105,7 +105,7 @@
                 store.subscribe(() => {
                     const lastAction = store.getState().lastAction;
 
-                    if (lastAction !== 'FETCH_PAYMENTS_SUCCESS')
+                    if (!['FETCH_PAYMENTS_SUCCESS', 'ADD_PAYMENT_SUCCESS'].includes(lastAction))
                         return;
 
                     const recordsCount = store.getState().payments.length;
