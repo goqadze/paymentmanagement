@@ -72,11 +72,38 @@
             letter-spacing: 2px;
             cursor: pointer;
         }
+
+        .success-msg {
+            color: #270;
+            background-color: #DFF2BF;
+            width: 300px;
+            display: none;
+            opacity: 0;
+            margin: 10px 0;
+            margin-left: 5px;
+            padding: 10px;
+            border-radius: 3px;
+        }
+
+        .visible {
+            display: block;
+            opacity: 1;
+            transition: opacity 2s linear;
+        }
+
+        .hidden {
+            display: none;
+            opacity: 0;
+            transition: visibility 0s 2s, opacity 2s linear;
+        }
     </style>
 
     <h2>Add new payment</h2>
     <a class="close" href="#">&times;</a>
     <div class="content">
+        <p class="success-msg visible">
+           Payment was added successfully 
+        </p>
         <form action="/store" method="post" accept-charset="utf-8">
             <div class="form-group">
                 <div class="form-control title">
