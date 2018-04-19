@@ -108,7 +108,7 @@
         .error label {
             color: #cc0033;
         }
-        .error input,textarea {
+        .error input, .error textarea {
             background-color: #fce4e4;
             border: 1px solid #cc0033;
             outline: none;
@@ -126,36 +126,36 @@
         </p>
         <form action="/store" method="post" accept-charset="utf-8">
             <div class="form-group">
-                <div class="form-control title">
+                <div class="form-control title error">
                     <label for="title">Title</label> 
                     <input type="text" name="title" id="title"/>
-                    <span class="error"></span>
+                    <span class="error-message">Title is as required field</span>
                 </div> 
                 <div class="form-control amount">
                     <label for="amount">Amount</label> 
                     <input type="text" name="amount" id="amount"/>
-                    <span class="error"></span>
+                    <span class="error-message"></span>
                 </div> 
             </div>
             <div class="form-group">
                 <div class="form-control">
                     <label for="category_id">Category</label> 
                     <input type="text" name="category_id" id="category_id"/>
-                    <span class="error"></span>
+                    <span class="error-message"></span>
                 </div> 
             </div>
             <div class="form-group">
                 <div class="form-control">
                     <label for="created_at">Date</label> 
                     <input type="date" name="created_at" id="created_at"/>
-                    <span class="error"></span>
+                    <span class="error-message"></span>
                 </div> 
             </div>
             <div class="form-group">
                 <div class="form-control">
                     <label for="comment">Comment</label> 
                     <textarea name="comment"></textarea>
-                    <span class="error"></span>
+                    <span class="error-message"></span>
                 </div> 
             </div>
             <button type="submit" id="submit-btn">Create</button>
