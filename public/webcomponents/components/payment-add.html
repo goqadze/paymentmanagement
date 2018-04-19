@@ -6,7 +6,8 @@
             margin-top: 0;
             color: #333;
             font-family: Tahoma, Arial, sans-serif;
-            margin-bottom: 0px;
+            margin-bottom: 3px;
+            margin-left: 6px;
         }
         .close {
             position: absolute;
@@ -121,7 +122,7 @@
     <h2>Add new payment</h2>
     <a class="close" href="#">&times;</a>
     <div class="content">
-        <p class="success-msg fadeInOut">
+        <p class="success-msg">
            Payment was added successfully 
         </p>
         <form action="/store" method="post" accept-charset="utf-8">
@@ -179,32 +180,37 @@
                 form.addEventListener('submit', evt => {
                     evt.preventDefault();
 
+                    this.showSuccessMessage();
+                    return;
+
                     const formData = new FormData(form);
 
                     store.dispatch(actions.addPayment(formData));
                 });
 
-                store.subscribe(() => {
-                    const state = store.getState();
-                    const lastAction = state.lastAction;
+                window.addEventListener('load', () => {
+                    store.subscribe(() => {
+                        const state = store.getState();
+                        const lastAction = state.lastAction;
 
-                    switch (lastAction) {
-                        case 'ADD_PAYMENT_SUCCESS':
-                            this.clearForm();
-                            this.showSuccessMessage();
-                            break;
-                        case 'ADD_PAYMENT_FAILED':
-                            this.showErrorMessages(state.errorMessages);
-                            break;
-                    }
+                        switch (lastAction) {
+                            case 'ADD_PAYMENT_SUCCESS':
+                                this.clearForm();
+                                this.showSuccessMessage();
+                                break;
+                            case 'ADD_PAYMENT_FAILED':
+                                this.showErrorMessages(state.errorMessages);
+                                break;
+                        }
+                    });
                 });
             }
 
             showSuccessMessage() {
-                const successMsg = this.shadowRoot.querySelector('success-msg');
+                const successMsg = this.shadowRoot.querySelector('.success-msg');
 
-                successMsg.classList.remove('hidden');
-
+                successMsg.classList.remove('fadeInOut');
+                successMsg.classList.add('fadeInOut');
             }
 
             clearForm() {
