@@ -10,12 +10,12 @@ export const fetchPayments = (filter) => {
     return fetch(url).then(res => res.json());
 };
 
+
 export const addPayment = (data) => {
-    return fetch("/store",
-        {
+    return fetch("/store", {
             method: "POST",
             body: data
-        }).then(res => res.json());
+        })
+        .then(res => res.json())
+        .then(res => !! res.errors ? Promise.reject(res) : Promise.resolve(res))
 };
-
-

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Filters\PaymentFilters;
 use App\Payment;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Validator;
 
 class PaymentController extends Controller
 {
@@ -27,12 +27,16 @@ class PaymentController extends Controller
      */
     public function store(Request $request)
     {
-        request()->validate([
+        $validator = Validator::make($request->all(), [
             'title' => 'required|min:4',
             'amount' => 'required|numeric|min:0.01',
             'comment' => 'required|min:4',
             'category_id' => 'required|exists:categories,id',
         ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()]);
+        }
 
         return Payment::create($request->all())->loadCategory();
     }

@@ -30,7 +30,7 @@ export const fetchPayments = (filter = {}, type = 'FETCH_PAYMENTS') => (dispatch
             dispatch({
                 type: `${type}_FAILURE`,
                 filter,
-                error: error || 'Something went wrong.',
+                error: error.errors || 'Something went wrong.',
             });
         }
     );
@@ -54,7 +54,7 @@ export const addPayment = (newPayment) => (dispatch, getState) => {
         error => {
             dispatch({
                 type: 'ADD_PAYMENT_FAILURE',
-                error: error || 'Something went wrong.',
+                errors: error.errors || 'Something went wrong.',
             });
         }
     );
