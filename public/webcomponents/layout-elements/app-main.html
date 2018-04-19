@@ -18,14 +18,9 @@
             flex-direction: column;
         }
 
-        @media (min-width: 768px) {
-            .list-and-charts {
-                display: flex;
-                flex-direction: row;
-            }
-        }
-
         .list-and-charts {
+            display: flex;
+            flex-direction: row;
             margin-top: 10px;
         }
 
@@ -33,9 +28,22 @@
             flex: 5;
             margin-right: 15px;
         }
-
         .list-and-charts > .charts {
             flex: 4;
+        }
+
+        @media (max-width: 768px) {
+            .list-and-charts {
+                display: flex;
+                flex-direction: column;
+            }
+            .list-and-charts > payments-list {
+                flex: 5;
+                margin-right: 0;
+            }
+            payments-chart {
+                margin-top: 15px;
+            }
         }
     </style>
 
