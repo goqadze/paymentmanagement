@@ -6,6 +6,7 @@
             margin-top: 0;
             color: #333;
             font-family: Tahoma, Arial, sans-serif;
+            margin-bottom: 0px;
         }
         .close {
             position: absolute;
@@ -75,22 +76,21 @@
             color: #270;
             background-color: #DFF2BF;
             width: 300px;
-            display: none;
+            visibility: hidden;
             opacity: 0;
-            margin: 10px 0;
+            margin: 0;
             margin-left: 5px;
             padding: 10px;
             border-radius: 3px;
         }
-        .visible {
-            display: block;
-            opacity: 1;
-            transition: opacity 2s linear;
+
+        .fadeInOut {
+            animation: fadeinout 5s linear forwards;
         }
-        .hidden {
-            display: none;
-            opacity: 0;
-            transition: visibility 0s 2s, opacity 2s linear;
+
+        @keyframes fadeinout {
+          0%, 100%{ acity: 0; visibility: hidden; }
+          3%, 90% { opacity: 1; visibility:visible;  }
         }
 
         /* Error Styling */
@@ -121,7 +121,7 @@
     <h2>Add new payment</h2>
     <a class="close" href="#">&times;</a>
     <div class="content">
-        <p class="success-msg visible">
+        <p class="success-msg fadeInOut">
            Payment was added successfully 
         </p>
         <form action="/store" method="post" accept-charset="utf-8">
@@ -201,6 +201,9 @@
             }
 
             showSuccessMessage() {
+                const successMsg = this.shadowRoot.querySelector('success-msg');
+
+                successMsg.classList.remove('hidden');
 
             }
 
