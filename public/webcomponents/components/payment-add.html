@@ -199,19 +199,16 @@
                 super.connectedCallback();
                 console.log('add payment connected to page');
 
-                const form = this.shadowRoot.querySelector('form');
-                this.form = form;
+                this.form = this.shadowRoot.querySelector('form');
 
-                form.addEventListener('submit', evt => {
-                    evt.preventDefault();
+                this.fillCategories();
 
-                    const formData = new FormData(form);
+                this.addPaymentSubmitEvent();
 
-                    this.clearErrors();
+                this.listenPaymentEvents();
+            }
 
-                    store.dispatch(actions.addPayment(formData));
-                });
-
+            listenPaymentEvents() {
                 store.subscribe(() => {
                     const state = store.getState();
                     const lastAction = state.lastAction;
@@ -225,6 +222,18 @@
                             this.showErrorMessages(state.errorMessages);
                             break;
                     }
+                });
+            }
+
+            addPaymentSubmitEvent() {
+                this.form.addEventListener('submit', evt => {
+                    evt.preventDefault();
+
+                    const formData = new FormData(this.form);
+
+                    this.clearErrors();
+
+                    store.dispatch(actions.addPayment(formData));
                 });
             }
 
@@ -266,6 +275,26 @@
                         const errorMsgEl = parentEl.querySelector('.error-message');
                         errorMsgEl.innerHTML = errors[key][0];
                     }
+                });
+            }
+
+            fillCategories() {
+                store.dispatch(actions.fetchCategories());
+
+                store.subscribe(() => {
+                    if (store.getState().lastAction !== 'FETCH_CATEGORIES_SUCCESS')
+                        return;
+
+                    const selectEl = this.shadowRoot.querySelector('#category_id');
+                    selectEl.innerHTML = '';
+
+                    const categories = store.getState().categories;
+                    categories.forEach(category => {
+                        const optionEl = document.createElement('option');
+                        optionEl.value = category.id;
+                        optionEl.innerHTML = category.title;
+                        selectEl.appendChild(optionEl);
+                    });
                 });
             }
         }

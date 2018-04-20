@@ -1,16 +1,14 @@
-import * as api from '../api/index.js';
-
-let actions = {};
-window['actions'] = actions;
+import * as api from "../api/index.js";
 
 export const fetchCurrentYearPayments = () => {
+    const currentYear = new Date(new Date().getFullYear(), 0, 1);
     const filter = {
-        min_date: new Date(new Date().getFullYear(), 0, 1)
+        min_date: currentYear
     };
+
     return fetchPayments(filter, 'FETCH_CURRENT_YEAR_PAYMENTS');
 };
 
-actions['fetchCurrentYearPayments'] = fetchCurrentYearPayments;
 
 export const fetchPayments = (filter = {}, type = 'FETCH_PAYMENTS') => (dispatch, getState) => {
     dispatch({
@@ -36,7 +34,6 @@ export const fetchPayments = (filter = {}, type = 'FETCH_PAYMENTS') => (dispatch
     );
 };
 
-actions['fetchPayments'] = fetchPayments;
 
 export const addPayment = (newPayment) => (dispatch, getState) => {
     dispatch({
@@ -60,4 +57,22 @@ export const addPayment = (newPayment) => (dispatch, getState) => {
     );
 };
 
+export const fetchCategories = () => (dispatch, getState) => {
+    return api.fetchCategories().then(
+        response => {
+            dispatch({
+                type: `FETCH_CATEGORIES_SUCCESS`,
+                response
+            });
+        }
+    );
+};
+
+
+let actions = {};
+window['actions'] = actions;
+
+actions['fetchCurrentYearPayments'] = fetchCurrentYearPayments;
+actions['fetchPayments'] = fetchPayments;
 actions['addPayment'] = addPayment;
+actions['fetchCategories'] = fetchCategories;

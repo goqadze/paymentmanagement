@@ -5,6 +5,7 @@ import payments from './payments.js';
 import paymentsCurrentYear from './paymentsCurrentYear.js';
 import lastAction from './lastAction.js';
 import errorMessages from './errorMessages.js';
+import categories from './categories.js';
 
 const combineReducers = (reducers) => {
     return (state = {}, action) => {
@@ -22,9 +23,10 @@ const paymentApp = combineReducers({
     isFetching,
     selectedCategory,
     payments,
+    categories,
     paymentsCurrentYear,
     lastAction,
-    errorMessages
+    errorMessages,
 });
 
 export default paymentApp;

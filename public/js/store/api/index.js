@@ -19,3 +19,8 @@ export const addPayment = (data) => {
         .then(res => res.json())
         .then(res => !! res.errors ? Promise.reject(res) : Promise.resolve(res))
 };
+
+
+export const fetchCategories = () => {
+    return fetch('categories').then(res => res.json());
+};

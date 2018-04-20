@@ -14,3 +14,5 @@
 Route::get('/', 'PaymentController@index');
 Route::get('/filter', 'PaymentController@filter');
 Route::post('/store', 'PaymentController@store');
+
+Route::get('/categories', 'PaymentController@categories');

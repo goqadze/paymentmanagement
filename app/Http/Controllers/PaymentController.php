@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Filters\PaymentFilters;
 use App\Payment;
 use Illuminate\Http\Request;
@@ -51,5 +52,15 @@ class PaymentController extends Controller
     public function filter(PaymentFilters $filters)
     {
         return Payment::latest()->filter($filters)->withCategory()->get();
+    }
+
+    /**
+     * Get a listing of the resource.
+     *
+     * @return Category[]|\Illuminate\Database\Eloquent\Collection
+     */
+    public function categories()
+    {
+        return Category::all();
     }
 }
