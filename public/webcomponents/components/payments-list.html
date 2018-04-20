@@ -1,5 +1,6 @@
 <link rel="import" href="payment-item.html">
 <link rel="import" href="../custom-html-element.html">
+<link rel="import" href="../custom-elements/loader/is-loading.html">
 
 <template id='payments-list-template'>
     <style>
@@ -9,6 +10,7 @@
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
+            position: relative;
         }
 
         #content {
@@ -43,6 +45,7 @@
         <p> Total </p>
         <p id="total-spent-value"> 40.30 </p>
     </div>
+    <is-loading></is-loading>
 </template>
 
 <script>
@@ -56,18 +59,29 @@
                 super.connectedCallback();
                 console.log('payments-list connected to page');
 
+
+                this.fillPaymentsList();
+            }
+
+            fillPaymentsList() {
                 store.dispatch(actions.fetchPayments());
+                this.setLoaderVisible(store.getState().isFetching);
 
                 store.subscribe(() => {
                     const lastAction = store.getState().lastAction;
-                    if (!['FETCH_PAYMENTS_SUCCESS', 'ADD_PAYMENT_SUCCESS'].includes(lastAction))
-                        return;
+                    if (['FETCH_PAYMENTS_SUCCESS', 'ADD_PAYMENT_SUCCESS'].includes(lastAction)) {
+                        const payments = store.getState().payments;
 
-                    const payments = store.getState().payments;
-
-                    this.updatePaymentList(payments);
-                    this.updateTotalSpent(payments);
+                        this.updatePaymentList(payments);
+                        this.updateTotalSpent(payments);
+                    }
+                    this.setLoaderVisible(store.getState().isFetching);
                 })
+            }
+
+            setLoaderVisible(visible) {
+                const loader = this.shadowRoot.querySelector('is-loading');
+                loader.visible = visible;
             }
 
             updatePaymentList(payments) {

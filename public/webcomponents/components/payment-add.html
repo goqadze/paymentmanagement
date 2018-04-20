@@ -1,4 +1,5 @@
 <link rel="import" href="../custom-html-element.html">
+<link rel="import" href="../custom-elements/loader/is-loading.html">
 
 <template id='add-payment-template'>
     <style>
@@ -186,6 +187,7 @@
             <button type="submit" id="submit-btn">Create</button>
         </form>
     </div>
+    <is-loading></is-loading>
 </template>
 
 <script>
@@ -202,9 +204,7 @@
                 this.form = this.shadowRoot.querySelector('form');
 
                 this.fillCategories();
-
                 this.addPaymentSubmitEvent();
-
                 this.listenPaymentEvents();
             }
 
@@ -222,6 +222,7 @@
                             this.showErrorMessages(state.errorMessages);
                             break;
                     }
+                    this.setLoaderVisible(store.getState().isAdding);
                 });
             }
 
@@ -232,9 +233,14 @@
                     const formData = new FormData(this.form);
 
                     this.clearErrors();
-
                     store.dispatch(actions.addPayment(formData));
+                    this.setLoaderVisible(store.getState().isAdding);
                 });
+            }
+
+            setLoaderVisible(visible) {
+                const loader = this.shadowRoot.querySelector('is-loading');
+                loader.visible = visible;
             }
 
             showSuccessMessage() {

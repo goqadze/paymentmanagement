@@ -1,175 +1,165 @@
 <link rel="import" href="../../custom-html-element.html">
 
 <template id='is-loading-template'>
+
     <style>
-    .loading-container {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-    }
-
-    .loader {
-        margin: 0 auto;
-        text-align: center;
-        width: 100%;
-        min-height: 100%;
-        display: table-cell;
-        vertical-align: middle;
-    }
-
-    .loader * {
-        animation-play-state: running;
-    }
-
-    .loading-spokes {
-        position: relative;
-        margin: auto;
-        height: 45px;
-    }
-
-    .loading-spokes .spoke-container {
-        position: absolute;
-        top: 100%;
-        left: calc(50% - 10px*1.5);
-        transform-origin: 50% -100%;
-    }
-
-    .loading-spokes .spoke-container .spoke {
-        box-sizing: border-box;
-        background: #454545;
-        width: 10px;
-        height: 40px;
-        border-radius: 10px;
-        animation: spoke 1.5s infinit    animation-delay: inherit;
-    }
-
-    .loading-spokes .spoke-container:nth-of-type(0n+1) {
-        transform: translateX(100%) rotate(-90deg);
-        animation-delay: 0s;
-    }
-
-    .loading-spok .spoke-container:nth-of-type(0n+2) {
-        transform: translateX(100%) rotate(-60deg);
-        animation-delay: 025s;
-    }
-
-    .loading-spokes .spoke-container:nth-of-type(0n+3) {
-        transform: translateX(100%) rotate(-30deg);
-        animation-delay: 0.25s;
-    }
-
-    .loading-spokes .spoke-container:nth-of-type(0n+4) {
-        transform: translateX(100%);
-        animation-delay: 0.375s;
-    }
-
-    .loading-spokes .spoke-container:nth-of-type(0n+5) {
-        transform: translateX(100%) rotate(30deg);
-        animation-delay: 0.5s;
-    }
-
-    .loading-spokes .spoke-container:nth-of-type(0n+6) {
-        transform: translateX(100%) rotate(60deg);
-        animation-delay: 0.625s;
-    }
-
-    .loading-spokes .spoke-container:nth-of-type(0n+7) {
-        transform: translateX(100%) rotate(90deg);
-        animation-delay: 0.75s;
-    }
-
-    .loading-spokes .spoke-container:nth-of-type(0n+8) {
-        transform: translateX(100%) rotate(120deg);
-        animation-delay: 0.875s;
-    }
-
-    .loading-spokes .spoke-container:nth-of-type(0n+9) {
-        transform: translateX(100%) rotate(150deg);
-        animation-delay: 1s;
-    }
-
-    .loading-spokes .spoke-container:nth-of-type(0n+10) {
-        transform: translateX(100%) rotate(180deg);
-        animation-: 1.125s;
-    }
-
-    .loading-spokes .spoke-container:nth-of-type(0n+11) {
-        transform: translateX(100%) rotate(210deg);
-        animation-delay: 1.25s;
-    }
-
-    .loading-spokes .spoke-container:nth-of-type(0n+12) {
-        transform: translateX(100%) rotate(240deg);
-        animation-delay: 1.375s;
-    }
-
-    @keyframes spoke {
-        0% {
-            opacity: 1;
+        :host {
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            display: none;
         }
-        100% {
-            opacity: 0.2;
+
+        :host([visible]) {
+            display: block;
         }
-    }
 
-    .main {
-        margin: 0 auto;
-        background: gol;
-        display: flex;
-        flex-direction: row;
-    }
+        .loader {
+            margin: 0 auto;
+            text-align: center;
+            width: 100%;
+            min-height: 100%;
+            display: table-cell;
+            vertical-align: middle;
+        }
 
-    .main .child {
-        width: 50%;
-        height: 200px;
-        background: dodgerblue;
-        display: flex;
-        position: relative;
-    }
+        .loader * {
+            animation-play-state: running;
+        }
+
+        .loading-spokes {
+            position: relative;
+            margin: auto;
+            height: 45px;
+        }
+
+        .loading-spokes .spoke-container {
+            position: absolute;
+            top: 100%;
+            left: calc(50% - 10px * 1.5);
+            transform-origin: 50% -100%;
+        }
+
+        .loading-spokes .spoke-container .spoke {
+            box-sizing: border-box;
+            background: #454545;
+            width: 10px;
+            height: 40px;
+            border-radius: 10px;
+            animation: spoke 1.5s infinite;
+            animation-delay: inherit;
+        }
+
+        .loading-spokes .spoke-container:nth-of-type(0n+1) {
+            transform: translateX(100%) rotate(-90deg);
+            animation-delay: 0s;
+        }
+
+        .loading-spokes .spoke-container:nth-of-type(0n+2) {
+            transform: translateX(100%) rotate(-60deg);
+            animation-delay: 0.125s;
+        }
+
+        .loading-spokes .spoke-container:nth-of-type(0n+3) {
+            transform: translateX(100%) rotate(-30deg);
+            animation-delay: 0.25s;
+        }
+
+        .loading-spokes .spoke-container:nth-of-type(0n+4) {
+            transform: translateX(100%);
+            animation-delay: 0.375s;
+        }
+
+        .loading-spokes .spoke-container:nth-of-type(0n+5) {
+            transform: translateX(100%) rotate(30deg);
+            animation-delay: 0.5s;
+        }
+
+        .loading-spokes .spoke-container:nth-of-type(0n+6) {
+            transform: translateX(100%) rotate(60deg);
+            animation-delay: 0.625s;
+        }
+
+        .loading-spokes .spoke-container:nth-of-type(0n+7) {
+            transform: translateX(100%) rotate(90deg);
+            animation-delay: 0.75s;
+        }
+
+        .loading-spokes .spoke-container:nth-of-type(0n+8) {
+            transform: translateX(100%) rotate(120deg);
+            animation-delay: 0.875s;
+        }
+
+        .loading-spokes .spoke-container:nth-of-type(0n+9) {
+            transform: translateX(100%) rotate(150deg);
+            animation-delay: 1s;
+        }
+
+        .loading-spokes .spoke-container:nth-of-type(0n+10) {
+            transform: translateX(100%) rotate(180deg);
+            animation-delay: 1.125s;
+        }
+
+        .loading-spokes .spoke-container:nth-of-type(0n+11) {
+            transform: translateX(100%) rotate(210deg);
+            animation-delay: 1.25s;
+        }
+
+        .loading-spokes .spoke-container:nth-of-type(0n+12) {
+            transform: translateX(100%) rotate(240deg);
+            animation-delay: 1.375s;
+        }
+
+        @keyframes spoke {
+            0% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0.2;
+            }
+        }
+
+
     </style>
 
-    <div class="main">
-        <div class="child">
-            <div class="loading-container">
-                <div class="loader">
-                    <div class="loading-spokes">
-                        <div class="spoke-container">
-                            <div class="spoke"></div>
-                        </div>
-                        <div class="spoke-container">
-                            <div class="spoke"></div>
-                        </div>
-                        <div class="spoke-container">
-                            <div class="spoke"></div>
-                        </div>
-                        <div class="spoke-container">
-                            <div class="spoke"></div>
-                        </div>
-                        <div class="spoke-container">
-                            <div="spoke"></div>
-                        </div>
-                        <div class="spoke-container">
-                            <div class="spoke"></div>
-                        </div>
-                        <div class="spoke-container">
-                            <div class="spoke"></div>
-                        </div>
-                        <div class="spoke-container">
-                            <div class="spoke"></div>
-                        </div>
-                        <div class="spoke-container">
-                            <div class="spoke"></div>
-                        </div>
-                        <div class="spoke-container">
-                            <div class="spoke"></div>
-                        </div>
-                        <div class="spoke-container">
-                            <div class="spoke"></div>
-                        </div>
-                        <div class="spoke-container">
-                            <div class="spoke"></div>
-                        </div>
-                    </div>
+    <div class="loading-container">
+        <div class="loader">
+            <div class="loading-spokes">
+                <div class="spoke-container">
+                    <div class="spoke"></div>
+                </div>
+                <div class="spoke-container">
+                    <div class="spoke"></div>
+                </div>
+                <div class="spoke-container">
+                    <div class="spoke"></div>
+                </div>
+                <div class="spoke-container">
+                    <div class="spoke"></div>
+                </div>
+                <div class="spoke-container">
+                    <div class="spoke"></div>
+                </div>
+                <div class="spoke-container">
+                    <div class="spoke"></div>
+                </div>
+                <div class="spoke-container">
+                    <div class="spoke"></div>
+                </div>
+                <div class="spoke-container">
+                    <div class="spoke"></div>
+                </div>
+                <div class="spoke-container">
+                    <div class="spoke"></div>
+                </div>
+                <div class="spoke-container">
+                    <div class="spoke"></div>
+                </div>
+                <div class="spoke-container">
+                    <div class="spoke"></div>
+                </div>
+                <div class="spoke-container">
+                    <div class="spoke"></div>
                 </div>
             </div>
         </div>
@@ -177,22 +167,34 @@
 
 </template>
 <script>
-(function () {
-    class Loader extends CustomHTMLElement {
-        constructor() {
-            super();
+    (function () {
+        class Loader extends CustomHTMLElement {
+            constructor() {
+                super();
+            }
+
+            connectedCallback() {
+                super.connectedCallback();
+                console.log('is-loading connected to page');
+            }
+
+            get visible() {
+                return this.hasAttribute('visible');
+            }
+
+            set visible(val) {
+                if (val) {
+                    this.setAttribute('visible', '');
+                } else {
+                    this.removeAttribute('visible');
+                }
+            }
         }
 
-        connectedCallback() {
-            super.connectedCallback();
-            console.log('is-loading connected to page');
-        }
-    }
-
-    let thisImportDoc = document.currentScript.ownerDocument;
-    Loader.templateId = 'is-loading-template';
-    Loader.importDoc = thisImportDoc;
-    ShadyCSS.prepareTemplate(Loader.template, 'is-loading');
-    customElements.define('is-loading', Loader);
-})();
+        let thisImportDoc = document.currentScript.ownerDocument;
+        Loader.templateId = 'is-loading-template';
+        Loader.importDoc = thisImportDoc;
+        ShadyCSS.prepareTemplate(Loader.template, 'is-loading');
+        customElements.define('is-loading', Loader);
+    })();
 </script>
