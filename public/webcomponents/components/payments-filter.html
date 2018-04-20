@@ -17,13 +17,6 @@
             width: 100%;
         }
 
-        @media (max-width: 768px) {
-            .filter-section, .extended-filters {
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-        }
-
         .extended-filters {
             display: none;
             flex-direction: row;
@@ -40,6 +33,20 @@
             border-right: thin solid #bbbbbb;
         }
 
+        @media (max-width: 800px) {
+            .extended-filters {
+                flex-direction: column;
+                justify-content: center;
+            }
+
+            .extended-filters .form-group:nth-child(2) {
+                border-top: thin solid #bbbbbb;
+                border-bottom: thin solid #bbbbbb;
+                border-left: 0;
+                border-right: 0;
+            }
+        }
+
         switch-category-field {
             flex: 5;
         }
@@ -49,16 +56,7 @@
             padding: 15px;
             display: flex;
             flex-direction: column;
-            align-items: center;
-        }
-
-        .form-group > .form-control {
-            min-width: 150px;
-        }
-
-        .form-group.category > .form-control {
-            align-self: flex-start;
-            margin-left: 8px;
+            align-items: flex-start;
         }
 
         .filter-section {
@@ -101,10 +99,14 @@
             margin-right: 10px;
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 800px) {
+            .filter-section{
+                flex-direction: column;
+            }
             .actions {
-                flex-wrap: wrap;
+                flex-direction: column;
                 justify-content: center;
+                margin: 0 auto;
             }
         }
 
@@ -118,15 +120,23 @@
             color: #f9f9fb;
             width: 150px;
             height: 40px;
+            outline: none;
             border-radius: 20px;
         }
         input {
-            padding: 10px 15px 10px 50px;
-            font-size: 23px;
-            color: #a7bedb;
-            border: none;
-            width: 220px;
+            padding: 10px;
+            color: #bbbbbb;
+            border: thin solid #bbbbbb;
+            width: 80%;
+            border-radius: 3px;
+            margin-bottom: 5px;
             outline: none;
+            box-sizing: border-box;
+        }
+
+        h3 {
+            color: #bbbbbb;
+            margin: 5px;
         }
     </style>
 
@@ -146,21 +156,21 @@
             </div>
         </div>
         <div class="extended-filters">
-            <div class="form-group category">
+            <div class="form-group">
                 <h3 class="form-control">filter by amount</h3>
-                <switch-category-field class="form-control input" name="category_id" value="-1"></switch-category-field>
+                <switch-category-field name="category_id" value="-1"></switch-category-field>
             </div>
 
             <div class="form-group">
                 <h3 class="form-control">filter by date</h3>
-                <input type="date" name="start_date" value="" class="form-control input" placeholder="from">
-                <input type="date" name="end_date" value="" class="form-control input" placeholder="to">
+                <input type="date" name="start_date" value="" placeholder="from">
+                <input type="date" name="end_date" value="" placeholder="to">
             </div>
 
             <div class="form-group">
                 <h3 class="form-control">filter by amount</h3>
-                <input type="number" name="min_amount" class="form-control input" placeholder="from">
-                <input type="number" name="max_amount" class="form-control input" placeholder="to">
+                <input type="number" name="min_amount" placeholder="from">
+                <input type="number" name="max_amount" placeholder="to">
             </div>
         </div>
     </form>
