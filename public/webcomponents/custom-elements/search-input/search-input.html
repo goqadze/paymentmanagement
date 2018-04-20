@@ -13,8 +13,15 @@
             background-size: 23px 23px;
             background-position: 8px 12px;
             background-color: #f9f9fb;
+            outline: none;
             border-left: thin solid #bbbbbb;
             border-right: thin solid #bbbbbb;
+        }
+
+        @media (max-height:800px) {
+            input[type="search"] {
+                border: none;
+            }
         }
 
         input[type="search"]::-webkit-input-placeholder {
