@@ -11,6 +11,10 @@
             border-bottom: thin solid #bbbbbb;
         }
 
+        :host([active]) {
+            background: #f3f3f7;
+        }
+
         #content {
             display: flex;
             flex-direction: column;
@@ -28,22 +32,78 @@
         .date-amount > p {
             text-align: end;
         }
+
+        #title {
+            color: #45617e;
+            margin: 0 0 8px;
+        }
+
+        #comment-block{
+            display: none;
+        }
+
+        #comment-title {
+            color: #45617e;
+            margin-bottom: 0;
+        }
+
+        #comment {
+            color: #bbbbbb;
+            font-size: 16px;
+            margin-top: 5px;
+            margin-bottom: 3px;
+        }
+
+        #amount {
+            color: #f85776;
+            margin: 0;
+            font-size: 24px;
+        }
+
+        #currency {
+            color: #f85776;
+            margin: 0;
+            font-size: 13px;
+        }
+
+        #date {
+            color: #bbbbbb;
+            font-weight: bold;
+            font-size: 14px;
+            margin: 0 0 3px;
+        }
+
+        #category {
+            display: inline-block;
+            background-color: #f9f9fb;
+            color: #a7bedb;
+            font-size: 14px;
+            border-radius: 50px;
+            border: 1px solid #a7bedb;
+            font-weight: normal;
+            text-align: center;
+            text-shadow: none;
+            padding: 6px 14px;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.1);
+            transition: all 0.1s ease-in-out;
+        }
+
     </style>
 
     <div id='content'>
         <div class="main-info">
             <div class="title-category">
-                <h4 class="title" id="title">title</h4>
-                <span class="category" id="category">category</span>
+                <h3 id="title">title</h3>
+                <span id="category">category</span>
             </div>
             <div class="date-amount">
-                <p class="date" id="date">on sunday, 18 April 2017</p>
-                <p class="amount" id="amount">-21.80</p>
-                <p>GEL</p>
+                <p id="date">on sunday, 18 April 2017</p>
+                <p id="amount">-21.80</p>
+                <p id="currency">GEL</p>
             </div>
         </div>
-        <div class="comment">
-            <h3>Comment:</h3>
+        <div id="comment-block">
+            <h5 id="comment-title">Comment:</h5>
             <p id="comment">comment comment comment comment comment comment </p>
         </div>
     </div>
@@ -69,6 +129,20 @@
                         element.innerText = this.getAttribute(key);
                     }
                 });
+            }
+
+            get active() {
+                this.getAttribute('active');
+            }
+
+            set active (val) {
+                if (val) {
+                    this.setAttribute('active', '');
+                    this.shadowRoot.querySelector('#comment-block').style.display = "block";
+                } else {
+                    this.removeAttribute('active');
+                    this.shadowRoot.querySelector('#comment-block').style.display = "none";
+                }
             }
         }
 

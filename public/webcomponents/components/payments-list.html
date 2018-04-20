@@ -93,8 +93,12 @@
                     paymentElement.setAttribute('title', payment.title);
                     paymentElement.setAttribute('date', payment.created_at);
                     paymentElement.setAttribute('category', payment.category.title);
-                    paymentElement.setAttribute('amount', payment.amount);
+                    paymentElement.setAttribute('amount', "-" + (+payment.amount).toFixed(2));
                     paymentElement.setAttribute('comment', payment.comment);
+                    paymentElement.addEventListener('click', () => {
+                        Array.from(paymentElement.parentElement.children).forEach(p => p.active = false);
+                        paymentElement.active = !paymentElement.active;
+                    });
                     content.appendChild(paymentElement);
                 });
             }
