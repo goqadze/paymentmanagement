@@ -61,6 +61,6 @@ class PaymentController extends Controller
      */
     public function categories()
     {
-        return Category::all();
+        return Category::all('id', 'title');
     }
 }
