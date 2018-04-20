@@ -85,12 +85,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__configureStore_js__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__actions_index_js__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__configureStore__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__actions__ = __webpack_require__(17);
 
 
 
-var store = Object(__WEBPACK_IMPORTED_MODULE_0__configureStore_js__["a" /* default */])();
+var store = Object(__WEBPACK_IMPORTED_MODULE_0__configureStore__["a" /* default */])();
 
 window['store'] = store;
 

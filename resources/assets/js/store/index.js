@@ -1,5 +1,5 @@
-import configureStore from './configureStore.js';
-import * as actions from './actions/index.js';
+import configureStore from './configureStore';
+import * as actions from './actions';
 
 const store = configureStore();
 
