@@ -91,7 +91,7 @@
                 payments.forEach(payment => {
                     const paymentElement = document.createElement('payment-item');
                     paymentElement.setAttribute('title', payment.title);
-                    paymentElement.setAttribute('date', payment.created_at);
+                    paymentElement.setAttribute('date', payment.created_at_formatted);
                     paymentElement.setAttribute('category', payment.category.title);
                     paymentElement.setAttribute('amount', "-" + (+payment.amount).toFixed(2));
                     paymentElement.setAttribute('comment', payment.comment);

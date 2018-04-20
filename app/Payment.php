@@ -21,6 +21,23 @@ class Payment extends Model
     protected $fillable = ['title', 'amount', 'comment', 'category_id', 'created_at'];
 
     /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = ['created_at_formatted'];
+
+    /**
+     * Get the formatted date.
+     *
+     * @return string
+     */
+    public function getCreatedAtFormattedAttribute()
+    {
+        return $this->created_at->format('\\o\\n l, d F Y');
+    }
+
+    /**
      * Get the category that owns the payment.
      */
     public function category()
