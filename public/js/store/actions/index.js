@@ -34,7 +34,6 @@ export const fetchPayments = (filter = {}, type = 'FETCH_PAYMENTS') => (dispatch
     );
 };
 
-
 export const addPayment = (newPayment) => (dispatch, getState) => {
     dispatch({
         type: 'ADD_PAYMENT_REQUEST',
@@ -54,7 +53,7 @@ export const addPayment = (newPayment) => (dispatch, getState) => {
                 errors: error.errors || 'Something went wrong.',
             });
         }
-    );
+    )
 };
 
 export const fetchCategories = () => (dispatch, getState) => {
