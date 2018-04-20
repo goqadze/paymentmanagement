@@ -22,6 +22,6 @@ $factory->define(App\Payment::class, function (Faker $faker) {
         'title' => $faker->jobTitle,
         'comment' => $faker->text,
         'amount' => $faker->numberBetween(1, 100),
-        'created_at' => $date->addWeeks(rand(1, 52))->format('Y-m-d H:i:s')
+        'created_at' => $date->addDays(rand(1, 365))->format('Y-m-d H:i:s')
     ];
 });
