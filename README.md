@@ -5,6 +5,8 @@
 
     cd paymentmanagement
     
+    cp .env.example .env
+    
     touch database/database.sqlite
 
     composer install
