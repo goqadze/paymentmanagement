@@ -5,39 +5,39 @@
         input[type="search"] {
             padding: 10px 15px 10px 50px;
             font-size: 23px;
-            color: #a7bedb;
+            color: var(--d-blue);;
             border: none;
             width: 220px;
             background-image: url(/images/search.png);
             background-repeat: no-repeat;
             background-size: 23px 23px;
             background-position: 8px 12px;
-            background-color: #f9f9fb;
+            background-color: var(--white);;
             outline: none;
-            border-left: thin solid #bbbbbb;
-            border-right: thin solid #bbbbbb;
+            border-left: thin solid var(--grey);;
+            border-right: thin solid var(--grey);;
         }
 
-        @media (max-height:800px) {
+        @media (max-height: 800px) {
             input[type="search"] {
                 border: none;
             }
         }
 
         input[type="search"]::-webkit-input-placeholder {
-            color: #bbbbbb;
+            color: var(--grey);;
         }
 
         input[type="search"]:-moz-placeholder { /* Firefox 18- */
-            color: #bbbbbb;
+            color: var(--grey);;
         }
 
         input[type="search"]::-moz-placeholder { /* Firefox 19+ */
-            color: #bbbbbb;
+            color: var(--grey);;
         }
 
         input[type="search"]:-ms-input-placeholder { /* interner explorer*/
-            color: #bbbbbb;
+            color: var(--grey);;
         }
     </style>
     <input type="search" placeholder="search..."/>

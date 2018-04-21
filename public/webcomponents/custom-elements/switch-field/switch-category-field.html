@@ -22,12 +22,12 @@
 
         label {
             display: inline-block;
-            background-color: #f9f9fb;
-            color: #a7bedb;
+            background-color: var(--white);;
+            color: var(--d-blue);;
             font-size: 14px;
             margin: 5px;
             border-radius: 50px;
-            border: 1px solid #a7bedb;
+            border: 1px solid var(--d-blue);;
             font-weight: normal;
             text-align: center;
             text-shadow: none;
@@ -41,11 +41,11 @@
         }
 
         input:checked + label {
-            background-color: #a7bedb;
+            background-color: var(--d-blue);;
             -webkit-box-shadow: none;
             box-shadow: none;
-            color: #f9f9fb;
-            border: 1px solid #a7bedb;
+            color: var(--white);;
+            border: 1px solid var(--d-blue);;
         }
     </style>
 
@@ -114,8 +114,8 @@
                     this.setAttribute('value', val);
                     this.dispatchEvent(new Event('input'));
                     store.dispatch({
-                       type: 'CATEGORY_CHANGED',
-                       category_id: val
+                        type: 'CATEGORY_CHANGED',
+                        category_id: val
                     });
                 }
             }

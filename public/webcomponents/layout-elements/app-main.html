@@ -7,7 +7,7 @@
 <template id='app-main-template'>
     <style>
         :host {
-            background: #f9f9fb;
+            background: var(--white);;
             margin: 0;
             padding: 10px;
             display: flex;
@@ -29,6 +29,7 @@
             flex: 5;
             margin-right: 15px;
         }
+
         .list-and-charts > .charts {
             flex: 4;
         }
@@ -38,17 +39,19 @@
                 display: flex;
                 flex-direction: column;
             }
+
             .list-and-charts > payments-list {
                 flex: 5;
                 margin-right: 0;
             }
+
             payments-chart {
                 margin-top: 15px;
             }
         }
 
-        #records-count{
-            color: #45617e;
+        #records-count {
+            color: var(--dd-blue);;
             margin-bottom: 7px;
         }
     </style>

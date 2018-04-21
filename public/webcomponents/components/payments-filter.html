@@ -6,7 +6,7 @@
 <template id='payments-filter-template'>
     <style>
         :host {
-            background: #d1ddeb;
+            background: var(--blue);;
             margin: 0 auto;
             display: flex;
         }
@@ -20,7 +20,7 @@
         .extended-filters {
             display: none;
             flex-direction: row;
-            background: #f9f9fb;
+            background: var(--white);;
             padding: 15px;
         }
 
@@ -29,8 +29,8 @@
         }
 
         .extended-filters .form-group:nth-child(2) {
-            border-left: thin solid #bbbbbb;
-            border-right: thin solid #bbbbbb;
+            border-left: thin solid var(--grey);;
+            border-right: thin solid var(--grey);;
         }
 
         @media (max-width: 800px) {
@@ -40,8 +40,8 @@
             }
 
             .extended-filters .form-group:nth-child(2) {
-                border-top: thin solid #bbbbbb;
-                border-bottom: thin solid #bbbbbb;
+                border-top: thin solid var(--grey);;
+                border-bottom: thin solid var(--grey);;
                 border-left: 0;
                 border-right: 0;
             }
@@ -60,7 +60,7 @@
         }
 
         .filter-section {
-            background: #f9f9fb;
+            background: var(--white);;
             color: white;
             display: flex;
             align-items: center;
@@ -72,9 +72,9 @@
             padding: 5px;
             font-size: 20px;
             cursor: pointer;
-            background: #f9f9fb;
+            background: var(--white);;
             text-decoration: none;
-            color: #a7bedb;
+            color: var(--d-blue);;
             border: none;
             width: 220px;
             display: flex;
@@ -83,7 +83,7 @@
         }
 
         .add-payment-btn > .circle {
-            border: 1px solid #a7bedb;
+            border: 1px solid var(--d-blue);;
             border-radius: 50%;
             font-size: 28px;
             text-align: center;
@@ -100,9 +100,10 @@
         }
 
         @media (max-width: 800px) {
-            .filter-section{
+            .filter-section {
                 flex-direction: column;
             }
+
             .actions {
                 flex-direction: column;
                 justify-content: center;
@@ -113,20 +114,21 @@
         .extended-filters-toggle {
             border: 0;
             font-size: 0.8rem;
-            background: #a7bedb;
+            background: var(--d-blue);;
             margin-left: 10px;
             text-transform: uppercase;
             cursor: pointer;
-            color: #f9f9fb;
+            color: var(--white);;
             width: 150px;
             height: 40px;
             outline: none;
             border-radius: 20px;
         }
+
         input {
             padding: 10px;
-            color: #bbbbbb;
-            border: thin solid #bbbbbb;
+            color: var(--grey);;
+            border: thin solid var(--grey);;
             width: 80%;
             border-radius: 3px;
             margin-bottom: 5px;
@@ -135,18 +137,15 @@
         }
 
         h3 {
-            color: #bbbbbb;
+            color: var(--grey);;
             margin: 5px;
         }
     </style>
 
 
-
-
-
     <form class="form">
         <div class="filter-section">
-            <a  href="#add-payment" class="add-payment-btn">
+            <a href="#add-payment" class="add-payment-btn">
                 <span class="circle">+</span>
                 <span>ADD PAYMENT</span>
             </a>

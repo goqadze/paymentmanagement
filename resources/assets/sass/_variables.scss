@@ -1,8 +1,10 @@
-
-// Body
-$body-bg: #f5f8fa;
-
-// Typography
-$font-family-sans-serif: "Raleway", sans-serif;
-$font-size-base: 0.9rem;
-$line-height-base: 1.6;
+:root {
+  --white: #f9f9fb;
+  --d-white: #f3f3f7;
+  --red: #f85776;
+  --blue: #d1ddeb;
+  --d-blue: #a7bedb;
+  --dd-blue: #45617e;
+  --grey: #bbbbbb;
+  --light-blue: #a1c3ff;
+}

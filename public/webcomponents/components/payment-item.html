@@ -3,16 +3,16 @@
 <template id='payment-item-template'>
     <style>
         :host {
-            background: #f9f9fb;
+            background: var(--white);;
             margin: 0;
             max-height: 400px;
             padding: 15px;
             display: block;
-            border-bottom: thin solid #bbbbbb;
+            border-bottom: thin solid var(--grey);;
         }
 
         :host([active]) {
-            background: #f3f3f7;
+            background: var(--d-white);;
         }
 
         #content {
@@ -34,40 +34,40 @@
         }
 
         #title {
-            color: #45617e;
+            color: var(--dd-blue);;
             margin: 0 0 8px;
         }
 
-        #comment-block{
+        #comment-block {
             display: none;
         }
 
         #comment-title {
-            color: #45617e;
+            color: var(--dd-blue);;
             margin-bottom: 0;
         }
 
         #comment {
-            color: #bbbbbb;
+            color: var(--grey);;
             font-size: 16px;
             margin-top: 5px;
             margin-bottom: 3px;
         }
 
         #amount {
-            color: #f85776;
+            color: var(--red);;
             margin: 0;
             font-size: 24px;
         }
 
         #currency {
-            color: #f85776;
+            color: var(--red);;
             margin: 0;
             font-size: 13px;
         }
 
         #date {
-            color: #bbbbbb;
+            color: var(--grey);;
             font-weight: bold;
             font-size: 14px;
             margin: 0 0 3px;
@@ -75,11 +75,11 @@
 
         #category {
             display: inline-block;
-            background-color: #f9f9fb;
-            color: #a7bedb;
+            background-color: var(--white);;
+            color: var(--d-blue);;
             font-size: 14px;
             border-radius: 50px;
-            border: 1px solid #a7bedb;
+            border: 1px solid var(--d-blue);;
             font-weight: normal;
             text-align: center;
             text-shadow: none;
@@ -135,7 +135,7 @@
                 this.getAttribute('active');
             }
 
-            set active (val) {
+            set active(val) {
                 if (val) {
                     this.setAttribute('active', '');
                     this.shadowRoot.querySelector('#comment-block').style.display = "block";
