@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Payments</title>
+
+    <link href='http://fonts.googleapis.com/css?family=Oxygen:400,300' rel='stylesheet' type='text/css'>
     <script src="/js/libs/polyfills/webcomponents-lite.js"></script>
 
     <link rel="import" href="/webcomponents/layout-elements/app-wrapper.html">
