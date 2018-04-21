@@ -6,91 +6,116 @@
             padding: 0;
             margin: 0;
             height: 100%;
-            width: 7.7%;
-            background: red;
+            background: #f9f9fb;
             display: flex;
-            align-items: flex-end; 
+            align-items: flex-end;
+            position: relative;
         }
 
         #content {
-            background: tomato;
             margin: 0 auto;
-
-            color: white;
-            overflow:hidden;
-
-            display:flex;
-            flex-direction:column;
-            align-items:center;
-            justify-content:flex-end;
-            height:80px;
-            width: 42px;
+            color: #f9f9fb;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            height: 100%;
+            width: 30px;
         }
-        
-        #content:hover {
-            background: green;
+
+        #amount-column {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #amount-column:hover {
             height: 100% !important;
+            overflow: visible;
         }
 
         p {
-            margin:0;
+            margin: 0;
             font-size: 13px;
         }
 
         #column {
-            min-height:50px;
-            width:100%;
-            background: yellow;
+            min-height: 50px;
+            width: 100%;
+            background: #a7bedb;
         }
+
+        #column:hover {
+            background: #45617e;
+        }
+
+        #amount {
+            color: #45617e;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        #month {
+            color: #45617e;
+        }
+
     </style>
 
     <div id="content">
-        <p id="amount">95.50</p>
-        <div id="column"> </div>
+        <div id="amount-column">
+            <p id="amount">95.50</p>
+            <div id="column"></div>
+        </div>
         <p id="month">Jan</p>
     </div>
 
 </template>
 <script>
-(function () {
-    class ChartColumn extends CustomHTMLElement {
-        constructor() {
-            super();
+    (function () {
+        class ChartColumn extends CustomHTMLElement {
+            constructor() {
+                super();
+            }
+
+            connectedCallback() {
+                super.connectedCallback();
+                console.log('chart-column connected to page');
+
+                this.height = this.getAttribute('height');
+                this.amount = this.getAttribute('amount');
+                this.month = this.getAttribute('month');
+            }
+
+            set height(value) {
+                const column = this.shadowRoot.querySelector('#column');
+                column.setAttribute('style', `min-height: ${value + 3}px`);
+
+                const amountColumnEl = this.shadowRoot.querySelector('#amount-column');
+                amountColumnEl.setAttribute('style', `height: ${column.offsetHeight}px`);
+
+                // const amountEl = this.shadowRoot.querySelector('#amount');
+                // amountEl.setAttribute('style', `bottom: ${column.offsetHeight}px; left: -50%`);
+            }
+
+            set amount(value) {
+                const amount = this.shadowRoot.querySelector('#amount');
+                amount.innerHTML = value;
+            }
+
+            set month(value) {
+                const month = this.shadowRoot.querySelector('#month');
+                month.innerHTML = value;
+            }
         }
 
-        connectedCallback() {
-            super.connectedCallback();
-            console.log('chart-column connected to page');
-
-            this.height = this.getAttribute('height');
-            this.amount = this.getAttribute('amount');
-            this.month = this.getAttribute('month');
-        }
-
-        set height(value) {
-            const column = this.shadowRoot.querySelector('#column');
-            column.setAttribute('style',`min-height: ${value}px`);
-
-            const content = this.shadowRoot.querySelector('#content');
-            const monthEl = this.shadowRoot.querySelector('#month');
-            content.setAttribute('style',`height: ${+column.offsetHeight + monthEl.offsetHeight}px`);
-        }
-
-        set amount(value) {
-            const amount = this.shadowRoot.querySelector('#amount');
-            amount.innerHTML = value;
-        }
-
-        set month(value) {
-            const month = this.shadowRoot.querySelector('#month');
-            month.innerHTML = value;
-        }
-    }
-
-    let thisImportDoc = document.currentScript.ownerDocument;
-    ChartColumn.templateId = 'chart-column-template';
-    ChartColumn.importDoc = thisImportDoc;
-    ShadyCSS.prepareTemplate(ChartColumn.template, 'chart-column');
-    customElements.define('chart-column', ChartColumn);
-})();
+        let thisImportDoc = document.currentScript.ownerDocument;
+        ChartColumn.templateId = 'chart-column-template';
+        ChartColumn.importDoc = thisImportDoc;
+        ShadyCSS.prepareTemplate(ChartColumn.template, 'chart-column');
+        customElements.define('chart-column', ChartColumn);
+    })();
 </script>
