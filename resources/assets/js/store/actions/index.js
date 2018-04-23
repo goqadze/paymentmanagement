@@ -9,7 +9,6 @@ export const fetchCurrentYearPayments = () => {
     return fetchPayments(filter, 'FETCH_CURRENT_YEAR_PAYMENTS');
 };
 
-
 export const fetchPayments = (filter = {}, type = 'FETCH_PAYMENTS') => (dispatch, getState) => {
     dispatch({
         type: `${type}_REQUEST`,

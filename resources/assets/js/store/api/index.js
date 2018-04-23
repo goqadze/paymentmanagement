@@ -4,12 +4,10 @@ const queryParams = (params) => {
         .join('&');
 };
 
-
 export const fetchPayments = (filter) => {
     const url = '/filter?' + queryParams(filter);
     return fetch(url).then(res => res.json());
 };
-
 
 export const addPayment = (data) => {
     return fetch("/store", {
@@ -19,7 +17,6 @@ export const addPayment = (data) => {
         .then(res => res.json())
         .then(res => !! res.errors ? Promise.reject(res) : Promise.resolve(res))
 };
-
 
 export const fetchCategories = () => {
     return fetch('categories').then(res => res.json());

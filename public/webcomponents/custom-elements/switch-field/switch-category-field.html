@@ -89,6 +89,10 @@
                 super.connectedCallback();
                 console.log('switch-category-field connected to page', this);
 
+                this.listenRadioButtonValueChange();
+            }
+
+            listenRadioButtonValueChange() {
                 let content = this.shadowRoot.querySelector('#content');
                 let radioInputs = content.getElementsByTagName('input');
 
