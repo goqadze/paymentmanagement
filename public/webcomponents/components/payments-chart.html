@@ -61,7 +61,11 @@
                 super.connectedCallback();
                 console.log('payments-chart connected to page');
 
-                this.shadowRoot.querySelector('#title').innerHTML = this.getAttribute('title');
+                this.title = this.getAttribute('title');
+            }
+
+            set title(val) {
+                this.shadowRoot.querySelector('#title').innerHTML = val;
             }
 
             get type() {
