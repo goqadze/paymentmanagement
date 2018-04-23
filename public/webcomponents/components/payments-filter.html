@@ -188,8 +188,15 @@
                 super.connectedCallback();
                 console.log('payments-filter connected to page');
 
-                const form = this.shadowRoot.querySelector('form');
-                const inputs = form.getElementsByClassName('input');
+                this.form = this.shadowRoot.querySelector('form');
+
+                this.listenFiltersChange();
+                
+                this.addExtendedFiltersToggleEvent();
+            }
+
+            listenFiltersChange() {
+                const inputs = this.form.getElementsByClassName('input');
 
                 Array.from(inputs).forEach(input => {
                     input.addEventListener('input', evt => {
@@ -199,8 +206,6 @@
                         store.dispatch(actions.fetchPayments(filterData));
                     });
                 });
-
-                this.addExtendedFiltersToggleEvent(form);
             }
 
             getFilterData(inputs) {
@@ -212,9 +217,9 @@
                 }, {});
             }
 
-            addExtendedFiltersToggleEvent(form) {
-                form.querySelector('.extended-filters-toggle').addEventListener('click', evt => {
-                    const extendedFilters = form.querySelector('.extended-filters');
+            addExtendedFiltersToggleEvent() {
+                this.form.querySelector('.extended-filters-toggle').addEventListener('click', evt => {
+                    const extendedFilters = this.form.querySelector('.extended-filters');
                     if (extendedFilters.hasAttribute('visible')) {
                         extendedFilters.removeAttribute('visible');
                     } else {
