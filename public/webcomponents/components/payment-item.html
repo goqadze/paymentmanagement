@@ -120,6 +120,11 @@
                 super.connectedCallback();
                 console.log('payment connected to page');
 
+                this.fillValues();
+
+            }
+            
+            fillValues() {
                 const keys = ['title', 'category', 'date', 'amount', 'comment'];
                 const content = this.shadowRoot.querySelector('#content');
 
