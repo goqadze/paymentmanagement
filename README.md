@@ -1,9 +1,9 @@
 #### Quick Installation
 
 ```bash
-    git clone https://github.com/goqadze/paymentmanagement
+    git clone https://github.com/goqadze/webcompapp
 
-    cd paymentmanagement
+    cd webcompapp
     
     cp .env.example .env
     
